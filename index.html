@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="./images/vite.svg" />
+    <title>Calculadora Veterinária</title>
+
+    <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("keydown", function (e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-top: 0;
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-top: 0;
+            color: #333;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .whatsapp-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .whatsapp-btn a {
+            display: inline-block;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        footer {
+            margin-top: 12px;
+            color: #666;
+            font-size: 12px;
+            background-color: #f5f5f5;
+            padding: 10px;
+            text-align: center;
+            border-top: 0px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .calculadora-container {
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+        }
+
+        .updateaviso {
+            margin-bottom: 12px;
+            padding: 12px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            color: red;
+            display: none;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .updateaviso a {
+            color: red !important;
+            text-decoration: none !important;
+        }
+
+        .calculadora-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .calculadora-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .codigo-box {
+            text-align: justify;
+            line-height: 1.5;
+            font-size: 15px;
+            color: #333;
+        }
+
+        .codigo-box.show {
+            display: block;
+        }
+
+        .codigo-titulo {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .botoes-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .botao-redirecionar {
+            flex: 1;
+            background-color: #f5f5f5;
+            color: #333;
+            border: 0px solid #ccc;
+            padding: 8px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font-size: 12px;
+            margin: 0 5px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-image {
+            width: 100%;
+            display: none;
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .calculadora-select {
+                font-size: 15px;
+            }
+
+            .whatsapp-btn a {
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            padding: 20px;
+
+            text-align: center;
+            max-width: 70%;
+
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 0;
+            color: #333;
+        }
+
+        .input-label {
+            font-size: 12px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+            margin-bottom: 5px;
+            color: #000;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .calculadora-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .concentracao-col,
+        .dose-col,
+        .volume-col,
+        .viaadmin-col {
+            width: calc(20% - 17px);
+            box-sizing: border-box;
+        }
+
+        .medicamento-col {
+            width: calc(30% - 15px);
+            box-sizing: border-box;
+        }
+
+        .medicamento-col h3,
+        .concentracao-col h3,
+        .dose-col h3,
+        .volume-col h3,
+        .viaadmin-col h3 {
+            font-size: 12px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+            color: #000;
+        }
+
+        h4 {
+            font-size: 15px;
+            margin-top: 30px;
+            margin-bottom: 8px;
+            color: #0b0ea0;
+            margin-left: 10px;
+        }
+
+        h5 {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            margin-left: 10px;
+            text-align: center;
+        }
+
+        .medicamento-col p,
+        .concentracao-col p,
+        .dose-col p,
+        .volume-col p,
+        .viaadmin-col p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .valores-input {
+            width: calc(100% - 0px);
+            margin-bottom: 8px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .resultado {
+            color: red;
+            font-weight: bold;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            background-color: #403e3f;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            margin-right: 5px;
+            border-radius: 5px;
+        }
+
+        #mensagemAlerta {
+            text-align: center;
+            background-color: #403e3f;
+            color: #FFFFFF;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            display: none;
+        }
+
+        .botao-voltar {
+            font-size: 12px;
+            background-color: #f5f5f5;
+            color: #333;
+            border: 0px solid #ccc;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .seletor-animal {
+            margin-bottom: 12px;
+        }
+
+        .seletor-animal label {
+            font-size: 12px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+            margin-bottom: 6px;
+            color: #000;
+        }
+
+        .seletor-animal select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        
+
+    </style>
+
+    <title>Protocolos</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <img class="carousel-image" src="./images/calculadorahome.jpg" alt="home" id="imagemRecarregar"
+            style="cursor: pointer;">
+        <h5>Orquiectomia</h5>
+
+        <div class="seletor-animal">
+            <label for="animal">Selecione o Animal:</label>
+            <select id="animal" name="animal"
+                onchange="ajustarDosesDexmedetomidina(); limparResultadosAoTrocarAnimal(); ajustarDosesCetamina(); ajustarDosesPropofol();">
+                <option value="selecione">Selecione</option>
+                <option value="cao">Cão</option>
+                <option value="gato">Gato</option>
+            </select>
+        </div>
+
+        <div class="calculadora-container">
+            <label class="input-label" for="pesoAnimal">Peso do Animal:</label>
+            <input type="number" id="pesoAnimal" name="pesoAnimal" placeholder="Digite o peso do animal" />
+        </div>
+
+        <h4>Medicação Pré Anestésica</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeDexmedetomidina" name="nomeDexmedetomidina"
+                    value="Dexmedetomidina" readonly />
+            </div>
+
+            <div class="dose-col">
+                <h3>Dose (mg/kg)</h3>
+                <input type="number" class="valores-input" id="doseDexmedetomidina" name="doseDexmedetomidina" />
+            </div>
+
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="number" class="valores-input" id="concentracaoDexmedetomidina"
+                    name="concentracaoDexmedetomidina" value="0.5" />
+            </div>
+
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
+            </div>
+
+            <div class="volume-col">
+                <h3>Volume(mL)</h3>
+                <input type="number" class="valores-input resultado" id="volumeDexmedetomidina"
+                    name="volumeDexmedetomidina" readonly />
+            </div>
+        </div>
+
+        <h4>Indução Anestésica</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeCetamina" name="nomeCetamina" value="Cetamina"
+                    readonly />
+                <input type="text" class="valores-input" id="nomePropofol" name="nomePropofol" value="Propofol"
+                    readonly />
+            </div>
+
+            <div class="dose-col">
+                <h3>Dose (mg/kg)</h3>
+                <input type="number" class="valores-input" id="doseCetamina" name="doseCetamina" />
+                <input type="number" class="valores-input" id="dosePropofol" name="dosePropofol" />
+            </div>
+
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="number" class="valores-input" id="concentracaoCetamina" name="concentracaoCetamina"
+                    value="10" />
+                <input type="number" class="valores-input" id="concentracaoPropofol" name="concentracaoPropofol"
+                    value="10" />
+            </div>
+
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+            </div>
+
+            <div class="volume-col">
+                <h3>Volume(mL)</h3>
+                <input type="number" class="valores-input resultado" id="volumeCetamina" name="volumeCetamina"
+                    readonly />
+                <input type="number" class="valores-input resultado" id="volumePropofol" name="volumePropofol"
+                    readonly />
+            </div>
+        </div>
+
+        <h4>Bloqueio Locorregional</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína"
+                    readonly />
+               
+            </div>
+
+            <div class="dose-col">
+                <h3>Dose (mg/kg)</h3>
+                <input type="number" class="valores-input" id="doseLidocaina" name="doseLidocaina" />
+              
+            </div>
+
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="number" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina"
+                    value="20" />
+                
+            </div>
+
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="LOCAL" readonly />
+                
+            </div>
+
+            <div class="volume-col">
+                <h3>Volume(mL)</h3>
+                <input type="number" class="valores-input resultado" id="volumeLidocaina" name="volumeLidocaina"
+                    readonly />
+                
+            </div>
+        </div>
+
+        <h4>Manutenção Anestésica</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeIsoflurano" name="nomeIsoflurano" value="Isoflurano"
+                    readonly />
+               
+            </div>
+
+            <div class="dose-col">
+                <h3>Dose (mg/kg)</h3>
+                <input type="text" class="valores-input" id="doseIsoflurano" name="doseIsoflurano"
+                    value="-" />
+              
+            </div>
+
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoIsoflurano" name="concentracaoIsoflurano"
+                    value="1,5 %" />
+                
+            </div>
+
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="INAL" readonly />
+                
+            </div>
+
+            <div class="volume-col">
+                <h3>Volume(mL)</h3>
+                <input type="text" class="valores-input resultado" id="volumeIsoflurano" name="volumeIsoflurano"
+                    value="-" readonly />
+                
+            </div>
+        </div>
+
+        
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparResultados()">Limpar</button>
+            <button class="reiniciar-btn" onclick="iniciarProtocolos()">Reiniciar</button>
+            <button onclick="calcularVolumes()">Calcular</button>
+        </div>
+
+        <div id="mensagemAlerta"></div>
+
+        <button class="botao-voltar" onclick="voltar()">◀︎ VOLTAR</button>
+
+        <footer>
+            © 2024 Marcelo Della Matta
+        </footer>
+    </div>
+
+    <script>
+        function ajustarDosesDexmedetomidina() {
+            var tipoAnimal = document.getElementById('animal').value;
+            var doseDexmedetomidina = document.getElementById('doseDexmedetomidina');
+            var doseCetamina = document.getElementById('doseCetamina');
+            var dosePropofol = document.getElementById('dosePropofol');
+            var doseLidocaina = document.getElementById('doseLidocaina');
+
+            if (tipoAnimal === 'cao') {
+                doseDexmedetomidina.value = '0.001';
+                doseCetamina.value = '1';
+                dosePropofol.value = '3';
+                doseLidocaina.value = '1';
+            } else if (tipoAnimal === 'gato') {
+                doseDexmedetomidina.value = '0.005';
+                doseCetamina.value = '2';
+                dosePropofol.value = '4';
+                doseLidocaina.value = '1';
+            }
+            
+        }
+
+        function calcularVolumes() {
+            var pesoAnimal = parseFloat(document.getElementById('pesoAnimal').value);
+            var doseDexmedetomidina = parseFloat(document.getElementById('doseDexmedetomidina').value);
+            var doseCetamina = parseFloat(document.getElementById('doseCetamina').value);
+            var dosePropofol = parseFloat(document.getElementById('dosePropofol').value);
+            var doseLidocaina = parseFloat(document.getElementById('doseLidocaina').value);
+            var concentracaoDexmedetomidina = parseFloat(document.getElementById('concentracaoDexmedetomidina').value);
+            var concentracaoCetamina = parseFloat(document.getElementById('concentracaoCetamina').value);
+            var concentracaoPropofol = parseFloat(document.getElementById('concentracaoPropofol').value);
+            var concentracaoLidocaina = parseFloat(document.getElementById('concentracaoLidocaina').value);
+
+            if (isNaN(pesoAnimal) || isNaN(doseDexmedetomidina) || isNaN(doseCetamina) || isNaN(dosePropofol) || isNaN(doseLidocaina) ||
+                isNaN(concentracaoDexmedetomidina) || isNaN(concentracaoCetamina) || isNaN(concentracaoPropofol) || isNaN(concentracaoLidocaina)) {
+                mensagemAlerta.innerText = "Preencha todos os campos corretamente.";
+                mensagemAlerta.style.display = 'block';
+            } else {
+                mensagemAlerta.innerText = "";
+                mensagemAlerta.style.display = 'none';
+            }
+
+            var volumeDexmedetomidina = (pesoAnimal * doseDexmedetomidina) / concentracaoDexmedetomidina;
+            var volumeCetamina = (pesoAnimal * doseCetamina) / concentracaoCetamina;
+            var volumePropofol = (pesoAnimal * dosePropofol) / concentracaoPropofol;
+            var volumeLidocaina = (pesoAnimal * doseLidocaina) / concentracaoLidocaina;
+
+            document.getElementById('volumeDexmedetomidina').value = volumeDexmedetomidina.toFixed(2);
+            document.getElementById('volumeCetamina').value = volumeCetamina.toFixed(2);
+            document.getElementById('volumePropofol').value = volumePropofol.toFixed(2);
+            document.getElementById('volumeLidocaina').value = volumeLidocaina.toFixed(2);
+        }
+
+        function limparResultadosAoTrocarAnimal() {
+            document.getElementById('volumeDexmedetomidina').value = '';
+            document.getElementById('volumeCetamina').value = '';
+            document.getElementById('volumePropofol').value = '';
+            document.getElementById('volumeLidocaina').value = '';
+        }
+
+        function limparResultados() {
+            document.getElementById('pesoAnimal').value = '';
+
+            document.getElementById('volumeDexmedetomidina').value = '';
+            document.getElementById('volumeCetamina').value = '';
+            document.getElementById('volumePropofol').value = '';
+            document.getElementById('volumeLidocaina').value = '';
+
+            document.getElementById('mensagemAlerta').style.display = 'none';
+        }
+
+        function iniciarProtocolos() {
+            document.getElementById('animal').value = 'selecione';
+            document.getElementById('pesoAnimal').value = '';
+
+            document.getElementById('concentracaoDexmedetomidina').value = '0.5';
+            document.getElementById('concentracaoCetamina').value = '10';
+            document.getElementById('concentracaoPropofol').value = '10';
+            document.getElementById('concentracaoLidocaina').value = '10';
+
+            document.getElementById('volumeDexmedetomidina').value = '';
+            document.getElementById('volumeCetamina').value = '';
+            document.getElementById('volumePropofol').value = '';
+            document.getElementById('volumeLidocaina').value = '';
+
+            document.getElementById('doseDexmedetomidina').value = '';
+            document.getElementById('doseCetamina').value = '';
+            document.getElementById('dosePropofol').value = '';
+            document.getElementById('doseLidocaina').value = '';
+
+            document.getElementById('mensagemAlerta').style.display = 'none';
+        }
+
+        function voltar() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>
