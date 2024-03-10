@@ -111,8 +111,16 @@
             background-color: #f5f5f5;
             border-radius: 10px;
             font-size: 13px;
-            text-align: justify;
             margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .calculadora-container-legenda {
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            font-size: 13px;
+            text-align: justify;
+            margin-top: 5px;
         }
 
         .updateaviso {
@@ -430,6 +438,13 @@
             style="cursor: pointer;">
         <h5>Orquiectomia</h5>
 
+        <div class="calculadora-container-mensa">
+            <li>Protocolo sugerido pelo Médico Veterinário Marcelo Della Matta, CRMV-PR 00000</li>
+            <li>Em caso de necessidade, ajuste os valores de doses e concentrações dos fármacos para alcançar resultados de acordo com sua preferência.</li>
+            <li>Para melhor visualização, recomendamos tela maior que 640px.</li>
+
+        </div>
+
         <div class="seletor-animal">
             <label for="animal">Selecione o Animal:</label>
             <select id="animal" name="animal" onchange="ajustarDosesFarmacos(); limparResultadosAoTrocarAnimal();">
@@ -442,10 +457,6 @@
         <div class="calculadora-container">
             <label class="input-label" for="pesoAnimal">Peso do Animal:</label>
             <input type="number" id="pesoAnimal" name="pesoAnimal" placeholder="Digite o peso do animal" />
-        </div>
-
-        <div class="calculadora-container-mensa">Protocolo sugerido pelo médico veterinário Marcelo Della Matta, CRMV-PR 232424, com pós-graduação em anestesiologia de pequenos animais. 
-            Em caso de necessidade, ajuste os valores de doses e concentrações dos fármacos para alcançar resultados de acordo com sua preferência.
         </div>
 
         <h4>Medicação Pré Anestésica</h4>
@@ -576,9 +587,11 @@
                 <h3>V: (mL) - Max</h3>
                 <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax" readonly />
             </div>
-            
-        </div>
 
+            <div class="calculadora-container-legenda"><li>Volume a ser administrado por ponto de Lidocaína Intratesticular</li>
+            </div>
+        </div>
+        
         <h4>Manutenção Anestésica</h4>
         <div class="calculadora-container">
             <div class="medicamento-col">
@@ -595,9 +608,84 @@
 
                 
             </div>
-        
 
-        
+            <h4>Pós-Operatório</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nome" name="nome" value="" readonly />
+            </div>
+            
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseMin" name="doseMin" />
+            </div>
+            
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseMax" name="doseMax" />
+            </div>
+            
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracao" name="concentracao" value="" />
+            </div>
+            
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="" readonly />
+            </div>
+            
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeMin" name="volumeMin" readonly />
+            </div>
+            
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeMax" name="volumeMax" readonly />
+            </div>
+            
+        </div>
+
+        <h4>Emergências</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nome" name="nome" value="" readonly />
+            </div>
+            
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseMin" name="doseMin" />
+            </div>
+            
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseMax" name="doseMax" />
+            </div>
+            
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracao" name="concentracao" value="" />
+            </div>
+            
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="" readonly />
+            </div>
+            
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeMin" name="volumeMin" readonly />
+            </div>
+            
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeMax" name="volumeMax" readonly />
+            </div>
+            
+        </div>
 
         <div class="btn-container">
             <button class="limpar-btn" onclick="limparResultados()">Limpar</button>
