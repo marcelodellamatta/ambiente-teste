@@ -16,7 +16,6 @@
             }
         });
     </script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -421,6 +420,27 @@
             border-radius: 6px;
             font-size: 15px;
         }
+
+        .seletor-protocolossel {
+            margin-bottom: 12px;
+        }
+
+        .seletor-protocolossel label {
+            font-size: 12px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+            margin-bottom: 6px;
+            color: #000;
+        }
+
+        .seletor-protocolossel select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
     </style>
     <title>Protocolos</title>
 </head>
@@ -448,464 +468,425 @@
                 <option value="gato">Gato</option>
             </select>
         </div>
+        <div class="seletor-protocolossel">
+            <label for="mostrarProtocolo">Selecione o Protocolo:</label>
+            <select id="mostrarProtocolo" name="mostrarProtocolo">
+                <option value="selecione">Selecione</option>
+                <option value="bradicardiainicial">Bradicardia Sinusal - Tratamento Inicial</option>
+                <option value="bradicardiapersistente">Bradicardia Sinusal - Persistente</option>
+                <option value="paradacardiorespiratoria">Paradas Cardiorespiratórias</option>
+                <option value="arritmias">Arritmias</option>
+                <option value="reversoropioides">Reversor de Opioides</option>
+                <option value="reversorbenzodiazepinicos">Reversor de Benzodiazepínicos</option>
+                <option value="reversoralfa2ago">Reversor de Alfa2 Agonistas</option>
+                <option value="depressaorespiratoria">Depressão Respiratória</option>
+                <option value="convulsivosinicial">Quadros Convulsivos - Tratamento Inicial</option>
+                <option value="convulsivospersistentes">Quadros Convulsivos – Persistentes</option>
+            </select>
+        </div>
         <div class="calculadora-container">
             <label class="input-label" for="pesoAnimal">Peso do Animal:</label>
             <input type="number" id="pesoAnimal" name="pesoAnimal" placeholder="Digite o peso do animal" />
+        </div>
+        <div id="bradicardiainicial" style="display: none;">
+            <h4>Bradicardia Sinusal - Tratamento Inicial</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeEscopolamina" name="nomeEscopolamina"
+                        value="Escopolamina" readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseEscopolaminaMin" name="doseEscopolaminaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseEscopolaminaMax" name="doseEscopolaminaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoEscopolamina"
+                        name="concentracaoEscopolamina" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeEscopolaminaMin"
+                        name="volumeEscopolaminaMin" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeEscopolaminaMax"
+                        name="volumeEscopolaminaMax" readonly />
+                </div>
+                <div class="calculadora-container-legenda">
+                    <li>Não recomendado para gatos</li>
+                </div>
+            </div>
+        </div>
+        <div id="bradicardiapersistente" style="display: none;">
+            <h4>Bradicardia Sinusal - Persistente</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeAtropina" name="nomeAtropina" value="Atropina"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseAtropinaMin" name="doseAtropinaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseAtropinaMax" name="doseAtropinaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoAtropina" name="concentracaoAtropina" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeAtropinaMin" name="volumeAtropinaMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeAtropinaMax" name="volumeAtropinaMax"
+                        readonly />
+                </div>
+            </div>
+        </div>
+        <div id="paradacardiorespiratoria" style="display: none;">
+            <h4>Paradas Cadiorrespiratórias </h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeAdrenalina" name="nomeAdrenalina"
+                        value="Adrenalina" readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseAdrenalinaMin" name="doseAdrenalinaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseAdrenalinaMax" name="doseAdrenalinaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoAdrenalina"
+                        name="concentracaoAdrenalina" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeAdrenalinaMin"
+                        name="volumeAdrenalinaMin" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeAdrenalinaMax"
+                        name="volumeAdrenalinaMax" readonly />
+                </div>
+                <div class="calculadora-container-legenda">
+                    <li>Volume a ser administrado a cada 5 minutos</li>
+                </div>
+            </div>
+        </div>
+        <div id="arritmias" style="display: none;">
+            <h4>Arritmias</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseLidocainaMin" name="doseLidocainaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseLidocainaMax" name="doseLidocainaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeLidocainaMin" name="volumeLidocainaMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax"
+                        readonly />
+                </div>
+                <div class="calculadora-container-legenda">
+                    <li>Não usar em bradiarritmias</li>
+                </div>
+            </div>
+        </div>
+        <div id="reversoropioides" style="display: none;">
+            <h4>Reversor de Opioides</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeNaloxona" name="nomeNaloxona" value="Naloxona"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseNaloxonaMin" name="doseNaloxonaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseNaloxonaMax" name="doseNaloxonaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoNaloxona" name="concentracaoNaloxona" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/IM/SC"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeNaloxonaMin" name="volumeNaloxonaMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeNaloxonaMax" name="volumeNaloxonaMax"
+                        readonly />
+                </div>
+            </div>
+        </div>
+        <div id="reversorbenzodiazepinicos" style="display: none;">
+            <h4>Reversor de Benzodiazepínicos</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeFlumazenil" name="nomeFlumazenil"
+                        value="Flumazenil" readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseFlumazenilMin" name="doseFlumazenilMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseFlumazenilMax" name="doseFlumazenilMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoFlumazenil"
+                        name="concentracaoFlumazenil" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeFlumazenilMin"
+                        name="volumeFlumazenilMin" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeFlumazenilMax"
+                        name="volumeFlumazenilMax" readonly />
+                </div>
+            </div>
+        </div>
+        <div id="reversoralfa2ago" style="display: none;">
+            <h4>Reversor de Alfa2 Agonistas</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeAtipamezole" name="nomeAtipamezole"
+                        value="Atipamezole" readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseAtipamezoleMin" name="doseAtipamezoleMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseAtipamezoleMax" name="doseAtipamezoleMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoAtipamezole"
+                        name="concentracaoAtipamezole" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/IM/SC"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeAtipamezoleMin"
+                        name="volumeAtipamezoleMin" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeAtipamezoleMax"
+                        name="volumeAtipamezoleMax" readonly />
+                </div>
+                <div class="calculadora-container-legenda">
+                    <li>Quando se usa dexdomitor e antisedan, o volume para cães é o mesmo, e para gatos é a metade do
+                        volume.</li>
+                </div>
+            </div>
+        </div>
+        <div id="depressaorespiratoria" style="display: none;">
+            <h4>Depressão Respiratória</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeDoxapran" name="nomeDoxapran" value="Doxapram"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseDoxapranMin" name="doseDoxapranMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseDoxapranMax" name="doseDoxapranMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoDoxapran" name="concentracaoDoxapran" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeDoxapranMin" name="volumeDoxapranMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeDoxapranMax" name="volumeDoxapranMax"
+                        readonly />
+                </div>
+            </div>
+        </div>
+        <div id="convulsivosinicial" style="display: none;">
+            <h4>Quadros Convulsivos</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeDiazepam" name="nomeDiazepam" value="Diazepam"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseDiazepamMin" name="doseDiazepamMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseDiazepamMax" name="doseDiazepamMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoDiazepam" name="concentracaoDiazepam" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/R" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeDiazepamMin" name="volumeDiazepamMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeDiazepamMax" name="volumeDiazepamMax"
+                        readonly />
+                </div>
+            </div>
+        </div>
+        <div id="convulsivospersistentes" style="display: none;">
+            <h4>Quadros Convulsivos – Persistentes</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeFenobarbital" name="nomeFenobarbital"
+                        value="Fenobarbital" readonly />
+                    <input type="text" class="valores-input" id="nomeFenobarbitalM" name="nomeFenobarbitalM"
+                        value="*Fenobarbital" readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseFenobarbitalMin" name="doseFenobarbitalMin" />
+                    <input type="text" class="valores-input" id="doseFenobarbitalMMin" name="doseFenobarbitalMMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseFenobarbitalMax" name="doseFenobarbitalMax" />
+                    <input type="text" class="valores-input" id="doseFenobarbitalMMax" name="doseFenobarbitalMMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoFenobarbital"
+                        name="concentracaoFenobarbital" />
+                    <input type="text" class="valores-input" id="concentracaoFenobarbitalM"
+                        name="concentracaoFenobarbitalM" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeFenobarbitalMin"
+                        name="volumeFenobarbitalMin" readonly />
+                    <input type="text" class="valores-input resultado" id="volumeFenobarbitalMMin"
+                        name="volumeFenobarbitalMMin" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeFenobarbitalMax"
+                        name="volumeFenobarbitalMax" readonly />
+                    <input type="text" class="valores-input resultado" id="volumeFenobarbitalMMax"
+                        name="volumeFenobarbitalMMax" readonly />
+                </div>
+                <div class="calculadora-container-legenda">
+                    <li>*Dose de manutenção , podendo ser feito IM após controle do quadro.</li>
+                </div>
+            </div>
         </div>
         <div class="btn-container">
             <button class="limpar-btn" onclick="limparResultados()">Limpar</button>
             <button class="reiniciar-btn" onclick="iniciarProtocolos()">Reiniciar</button>
             <button onclick="calcularVolumes()">Calcular</button>
         </div>
-        <h4>Bradicardia Sinusal - Tratamento Inicial</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeEscopolamina" name="nomeEscopolamina"
-                    value="Escopolamina" readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseEscopolaminaMin" name="doseEscopolaminaMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseEscopolaminaMax" name="doseEscopolaminaMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoEscopolamina"
-                    name="concentracaoEscopolamina" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeEscopolaminaMin"
-                    name="volumeEscopolaminaMin" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeEscopolaminaMax"
-                    name="volumeEscopolaminaMax" readonly />
-
-            </div>
-            <div class="calculadora-container-legenda">
-                <li>Não recomendado para gatos</li>
-            </div>
-        </div>
-        <h4>Bradicardia Sinusal - Persistente</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeAtropina" name="nomeAtropina" value="Atropina"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseAtropinaMin" name="doseAtropinaMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseAtropinaMax" name="doseAtropinaMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoAtropina" name="concentracaoAtropina" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeAtropinaMin" name="volumeAtropinaMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeAtropinaMax" name="volumeAtropinaMax"
-                    readonly />
-
-            </div>
-        </div>
-
-        <h4>Paradas Cadiorrespiratórias </h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeAdrenalina" name="nomeAdrenalina" value="Adrenalina"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseAdrenalinaMin" name="doseAdrenalinaMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseAdrenalinaMax" name="doseAdrenalinaMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoAdrenalina" name="concentracaoAdrenalina" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeAdrenalinaMin" name="volumeAdrenalinaMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeAdrenalinaMax" name="volumeAdrenalinaMax"
-                    readonly />
-
-            </div>
-            <div class="calculadora-container-legenda">
-                <li>Volume a ser administrado a cada 5 minutos</li>
-            </div>
-        </div>
-
-        <h4>Arritmias</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseLidocainaMin" name="doseLidocainaMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseLidocainaMax" name="doseLidocainaMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeLidocainaMin" name="volumeLidocainaMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax"
-                    readonly />
-
-            </div>
-            <div class="calculadora-container-legenda">
-                <li>Não usar em bradiarritmias</li>
-            </div>
-        </div>
-
-        <h4>Reversor de Opioides</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeNaloxona" name="nomeNaloxona" value="Naloxona"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseNaloxonaMin" name="doseNaloxonaMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseNaloxonaMax" name="doseNaloxonaMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoNaloxona" name="concentracaoNaloxona" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/IM/SC" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeNaloxonaMin" name="volumeNaloxonaMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeNaloxonaMax" name="volumeNaloxonaMax"
-                    readonly />
-
-            </div>
-        </div>
-
-        <h4>Reversor de Benzodiazepínicos</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeFlumazenil" name="nomeFlumazenil" value="Flumazenil"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseFlumazenilMin" name="doseFlumazenilMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseFlumazenilMax" name="doseFlumazenilMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoFlumazenil" name="concentracaoFlumazenil" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeFlumazenilMin" name="volumeFlumazenilMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeFlumazenilMax" name="volumeFlumazenilMax"
-                    readonly />
-
-            </div>
-        </div>
-
-        <h4>Reversor de Alfa2 Agonistas</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeAtipamezole" name="nomeAtipamezole" value="Atipamezole"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseAtipamezoleMin" name="doseAtipamezoleMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseAtipamezoleMax" name="doseAtipamezoleMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoAtipamezole" name="concentracaoAtipamezole" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/IM/SC" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeAtipamezoleMin" name="volumeAtipamezoleMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeAtipamezoleMax" name="volumeAtipamezoleMax"
-                    readonly />
-
-            </div>
-            <div class="calculadora-container-legenda">
-                <li>Quando se usa dexdomitor e antisedan, o volume para cães é o mesmo, e para gatos é a metade do
-                    volume.</li>
-            </div>
-        </div>
-
-        <h4>Depressão Respiratória</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeDoxapran" name="nomeDoxapran" value="Doxapram"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseDoxapranMin" name="doseDoxapranMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseDoxapranMax" name="doseDoxapranMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoDoxapran" name="concentracaoDoxapran" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeDoxapranMin" name="volumeDoxapranMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeDoxapranMax" name="volumeDoxapranMax"
-                    readonly />
-
-            </div>
-        </div>
-
-        <h4>Quadros Convulsivos</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeDiazepam" name="nomeDiazepam" value="Diazepam"
-                    readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseDiazepamMin" name="doseDiazepamMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseDiazepamMax" name="doseDiazepamMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoDiazepam" name="concentracaoDiazepam" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/R" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeDiazepamMin" name="volumeDiazepamMin"
-                    readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeDiazepamMax" name="volumeDiazepamMax"
-                    readonly />
-
-            </div>
-        </div>
-
-        <h4>Quadros Convulsivos – Persistentes</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeFenobarbital" name="nomeFenobarbital"
-                    value="Fenobarbital" readonly />
-                <input type="text" class="valores-input" id="nomeFenobarbitalM" name="nomeFenobarbitalM"
-                    value="*Fenobarbital" readonly />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseFenobarbitalMin" name="doseFenobarbitalMin" />
-                <input type="text" class="valores-input" id="doseFenobarbitalMMin" name="doseFenobarbitalMMin" />
-
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseFenobarbitalMax" name="doseFenobarbitalMax" />
-                <input type="text" class="valores-input" id="doseFenobarbitalMMax" name="doseFenobarbitalMMax" />
-
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoFenobarbital"
-                    name="concentracaoFenobarbital" />
-                <input type="text" class="valores-input" id="concentracaoFenobarbitalM"
-                    name="concentracaoFenobarbitalM" />
-
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMin"
-                    name="volumeFenobarbitalMin" readonly />
-                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMMin"
-                    name="volumeFenobarbitalMMin" readonly />
-
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMax"
-                    name="volumeFenobarbitalMax" readonly />
-                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMMax"
-                    name="volumeFenobarbitalMMax" readonly />
-
-            </div>
-            <div class="calculadora-container-legenda">
-                <li>*Dose de manutenção , podendo ser feito IM após controle do quadro.</li>
-            </div>
-        </div>
-
-
         <div id="mensagemAlerta"></div>
         <button class="botao-voltar" onclick="voltar()">◀︎ VOLTAR</button>
         <footer>
@@ -1162,6 +1143,7 @@
         }
         function iniciarProtocolos() {
             document.getElementById('animal').value = 'selecione';
+            document.getElementById('mostrarProtocolo').value = 'selecione';
             document.getElementById('pesoAnimal').value = '';
             document.getElementById('concentracaoEscopolamina').value = '';
             document.getElementById('concentracaoAtropina').value = '';
@@ -1219,12 +1201,157 @@
             document.getElementById('doseFenobarbitalMMin').value = '';
             document.getElementById('doseFenobarbitalMMax').value = '';
             document.getElementById('mensagemAlerta').style.display = 'none';
+            document.getElementById('bradicardiainicial').style.display = 'none';
+            document.getElementById('bradicardiapersistente').style.display = 'none';
+            document.getElementById('paradacardiorespiratoria').style.display = 'none';
+            document.getElementById('arritmias').style.display = 'none';
+            document.getElementById('reversoropioides').style.display = 'none';
+            document.getElementById('reversorbenzodiazepinicos').style.display = 'none';
+            document.getElementById('reversoralfa2ago').style.display = 'none';
+            document.getElementById('depressaorespiratoria').style.display = 'none';
+            document.getElementById('convulsivosinicial').style.display = 'none';
+            document.getElementById('convulsivospersistentes').style.display = 'none';
         }
         function voltar() {
             window.location.href = 'index.html';
         }
+        document.getElementById("mostrarProtocolo").addEventListener("change", function () {
+            var selecao = document.getElementById("mostrarProtocolo").value;
+            var bradicardiainicial = document.getElementById("bradicardiainicial");
+            var bradicardiapersistente = document.getElementById("bradicardiapersistente");
+            var paradacardiorespiratoria = document.getElementById("paradacardiorespiratoria");
+            var arritmias = document.getElementById("arritmias");
+            var reversoropioides = document.getElementById("reversoropioides");
+            var reversorbenzodiazepinicos = document.getElementById("reversorbenzodiazepinicos");
+            var reversoralfa2ago = document.getElementById("reversoralfa2ago");
+            var depressaorespiratoria = document.getElementById("depressaorespiratoria");
+            var convulsivosinicial = document.getElementById("convulsivosinicial");
+            var convulsivospersistentes = document.getElementById("convulsivospersistentes");
+            if (selecao === "bradicardiainicial") {
+                bradicardiainicial.style.display = "block";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "bradicardiapersistente") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "block";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "paradacardiorespiratoria") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "block";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "arritmias") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "block";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "reversoropioides") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "block";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "reversorbenzodiazepinicos") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "block";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "reversoralfa2ago") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "block";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "depressaorespiratoria") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "block";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "convulsivosinicial") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "block";
+                convulsivospersistentes.style.display = "none";
+            } else if (selecao === "convulsivospersistentes") {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "block";
+            }
+            else {
+                bradicardiainicial.style.display = "none";
+                bradicardiapersistente.style.display = "none";
+                paradacardiorespiratoria.style.display = "none";
+                arritmias.style.display = "none";
+                reversoropioides.style.display = "none";
+                reversorbenzodiazepinicos.style.display = "none";
+                reversoralfa2ago.style.display = "none";
+                depressaorespiratoria.style.display = "none";
+                convulsivosinicial.style.display = "none";
+                convulsivospersistentes.style.display = "none";
+            }
+        });
     </script>
-
 </body>
 
 </html>

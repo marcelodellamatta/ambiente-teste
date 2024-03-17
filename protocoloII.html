@@ -16,7 +16,6 @@
             }
         });
     </script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -421,6 +420,27 @@
             border-radius: 6px;
             font-size: 15px;
         }
+
+        .seletor-protocolossel {
+            margin-bottom: 12px;
+        }
+
+        .seletor-protocolossel label {
+            font-size: 12px;
+            font-weight: bold;
+            text-align: left;
+            display: block;
+            margin-bottom: 6px;
+            color: #000;
+        }
+
+        .seletor-protocolossel select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
     </style>
     <title>Protocolos</title>
 </head>
@@ -446,189 +466,213 @@
                 <option value="gato">Gato</option>
             </select>
         </div>
+
+        <div class="seletor-protocolossel">
+            <label for="mostrarProtocolo">Selecione o Protocolo:</label>
+            <select id="mostrarProtocolo" name="mostrarProtocolo">
+                <option value="selecione">Selecione</option>
+                <option value="mpa">Medicação Pré Anestésica</option>
+                <option value="inducaoanestesica">Indução Anestésica</option>
+                <option value="bloqueioregional">Bloqueio Locorregional</option>
+                <option value="manutencaoanestesica">Manutenção Anestésica</option>
+                <option value="posoperatorio">Pós-Operatório</option>
+            </select>
+        </div>
         <div class="calculadora-container">
             <label class="input-label" for="pesoAnimal">Peso do Animal:</label>
             <input type="number" id="pesoAnimal" name="pesoAnimal" placeholder="Digite o peso do animal" />
+        </div>
+
+        <div id="mpa" style="display: none;">
+            <h4>Medicação Pré Anestésica</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeDexmedetomidina" name="nomeDexmedetomidina"
+                        value="Dexmedetomidina" readonly />
+                    <input type="text" class="valores-input" id="nomeMetadona" name="nomeMetadona" value="Metadona"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseDexmedetomidinaMin"
+                        name="doseDexmedetomidinaMin" />
+                    <input type="text" class="valores-input" id="doseMetadonaMin" name="doseMetadonaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseDexmedetomidinaMax"
+                        name="doseDexmedetomidinaMax" />
+                    <input type="text" class="valores-input" id="doseMetadonaMax" name="doseMetadonaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoDexmedetomidina"
+                        name="concentracaoDexmedetomidina" />
+                    <input type="text" class="valores-input" id="concentracaoMetadona" name="concentracaoMetadona" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeDexmedetomidinaMin"
+                        name="volumeDexmedetomidinaMin" readonly />
+                    <input type="text" class="valores-input resultado" id="volumeMetadonaMin" name="volumeMetadonaMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeDexmedetomidinaMax"
+                        name="volumeDexmedetomidinaMax" readonly />
+                    <input type="text" class="valores-input resultado" id="volumeMetadonaMax" name="volumeMetadonaMax"
+                        readonly />
+                </div>
+            </div>
+        </div>
+        <div id="inducaoanestesica" style="display: none;">
+            <h4>Indução Anestésica</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeCetamina" name="nomeCetamina" value="Cetamina"
+                        readonly />
+                    <input type="text" class="valores-input" id="nomePropofol" name="nomePropofol" value="Propofol"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseCetaminaMin" name="doseCetaminaMin" />
+                    <input type="text" class="valores-input" id="dosePropofolMin" name="dosePropofolMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseCetaminaMax" name="doseCetaminaMax" />
+                    <input type="text" class="valores-input" id="dosePropofolMax" name="dosePropofolMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoCetamina" name="concentracaoCetamina" />
+                    <input type="text" class="valores-input" id="concentracaoPropofol" name="concentracaoPropofol" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadminCetamina" name="viadeadminCetamina"
+                        value="IV" readonly />
+                    <input type="text" class="valores-input " id="viadeadminPropofol" name="viadeadminPropofol"
+                        value="IV" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeCetaminaMin" name="volumeCetaminaMin"
+                        readonly />
+                    <input type="text" class="valores-input resultado" id="volumePropofolMin" name="volumePropofolMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeCetaminaMax" name="volumeCetaminaMax"
+                        readonly />
+                    <input type="text" class="valores-input resultado" id="volumePropofolMax" name="volumePropofolMax"
+                        readonly />
+                </div>
+            </div>
+        </div>
+        <div id="bloqueioregional" style="display: none;">
+            <h4>Bloqueio Locorregional</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína"
+                        readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseLidocainaMin" name="doseLidocainaMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseLidocainaMax" name="doseLidocainaMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadminLidocaina" name="viadeadminLidocaina"
+                        value="IT" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeLidocainaMin" name="volumeLidocainaMin"
+                        readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax"
+                        readonly />
+                </div>
+                <div class="calculadora-container-legenda">
+                    <li>Volume a ser administrado por ponto de Lidocaína Intratesticular</li>
+                </div>
+            </div>
+        </div>
+        <div id="manutencaoanestesica" style="display: none;">
+            <h4>Manutenção Anestésica</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nomeIsoflurano" name="nomeIsoflurano"
+                        value="Isoflurano" readonly />
+                </div>
+                <div class="medicamento-col-man">
+                    <h3>Volume (mL)</h3>
+                    <input type="text" class="valores-input" id="doseIsoflurano" name="doseIsoflurano"
+                        value="Taxa Variável " />
+                </div>
+            </div>
+        </div>
+        <div id="posoperatorio" style="display: none;">
+            <h4>Pós-Operatório</h4>
+            <div class="calculadora-container">
+                <div class="medicamento-col">
+                    <h3>Fármaco</h3>
+                    <input type="text" class="valores-input" id="nome" name="nome" value="" readonly />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Min</h3>
+                    <input type="text" class="valores-input" id="doseMin" name="doseMin" />
+                </div>
+                <div class="dose-col">
+                    <h3>D: (mg/kg) - Max</h3>
+                    <input type="text" class="valores-input" id="doseMax" name="doseMax" />
+                </div>
+                <div class="concentracao-col">
+                    <h3>Conc. (mg/mL)</h3>
+                    <input type="text" class="valores-input" id="concentracao" name="concentracao" />
+                </div>
+                <div class="viaadmin-col">
+                    <h3>Via de Admin</h3>
+                    <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Min</h3>
+                    <input type="text" class="valores-input resultado" id="volumeMin" name="volumeMin" readonly />
+                </div>
+                <div class="volume-col">
+                    <h3>V: (mL) - Max</h3>
+                    <input type="text" class="valores-input resultado" id="volumeMax" name="volumeMax" readonly />
+                </div>
+            </div>
         </div>
         <div class="btn-container">
             <button class="limpar-btn" onclick="limparResultados()">Limpar</button>
             <button class="reiniciar-btn" onclick="iniciarProtocolos()">Reiniciar</button>
             <button onclick="calcularVolumes()">Calcular</button>
         </div>
-        <h4>Medicação Pré Anestésica</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeDexmedetomidina" name="nomeDexmedetomidina"
-                    value="Dexmedetomidina" readonly />
-                <input type="text" class="valores-input" id="nomeMetadona" name="nomeMetadona" value="Metadona"
-                    readonly />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseDexmedetomidinaMin" name="doseDexmedetomidinaMin" />
-                <input type="text" class="valores-input" id="doseMetadonaMin" name="doseMetadonaMin" />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseDexmedetomidinaMax" name="doseDexmedetomidinaMax" />
-                <input type="text" class="valores-input" id="doseMetadonaMax" name="doseMetadonaMax" />
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoDexmedetomidina"
-                    name="concentracaoDexmedetomidina" />
-                <input type="text" class="valores-input" id="concentracaoMetadona" name="concentracaoMetadona" />
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeDexmedetomidinaMin"
-                    name="volumeDexmedetomidinaMin" readonly />
-                <input type="text" class="valores-input resultado" id="volumeMetadonaMin" name="volumeMetadonaMin"
-                    readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeDexmedetomidinaMax"
-                    name="volumeDexmedetomidinaMax" readonly />
-                <input type="text" class="valores-input resultado" id="volumeMetadonaMax" name="volumeMetadonaMax"
-                    readonly />
-            </div>
-        </div>
-        <h4>Indução Anestésica</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeCetamina" name="nomeCetamina" value="Cetamina"
-                    readonly />
-                <input type="text" class="valores-input" id="nomePropofol" name="nomePropofol" value="Propofol"
-                    readonly />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseCetaminaMin" name="doseCetaminaMin" />
-                <input type="text" class="valores-input" id="dosePropofolMin" name="dosePropofolMin" />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseCetaminaMax" name="doseCetaminaMax" />
-                <input type="text" class="valores-input" id="dosePropofolMax" name="dosePropofolMax" />
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoCetamina" name="concentracaoCetamina" />
-                <input type="text" class="valores-input" id="concentracaoPropofol" name="concentracaoPropofol" />
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadminCetamina" name="viadeadminCetamina" value="IV"
-                    readonly />
-                <input type="text" class="valores-input " id="viadeadminPropofol" name="viadeadminPropofol" value="IV"
-                    readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeCetaminaMin" name="volumeCetaminaMin"
-                    readonly />
-                <input type="text" class="valores-input resultado" id="volumePropofolMin" name="volumePropofolMin"
-                    readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeCetaminaMax" name="volumeCetaminaMax"
-                    readonly />
-                <input type="text" class="valores-input resultado" id="volumePropofolMax" name="volumePropofolMax"
-                    readonly />
-            </div>
-        </div>
-        <h4>Bloqueio Locorregional</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína"
-                    readonly />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseLidocainaMin" name="doseLidocainaMin" />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseLidocainaMax" name="doseLidocainaMax" />
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina" />
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadminLidocaina" name="viadeadminLidocaina" value="IT"
-                    readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeLidocainaMin" name="volumeLidocainaMin"
-                    readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax"
-                    readonly />
-            </div>
-            <div class="calculadora-container-legenda">
-                <li>Volume a ser administrado por ponto de Lidocaína Intratesticular</li>
-            </div>
-        </div>
-        <h4>Manutenção Anestésica</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeIsoflurano" name="nomeIsoflurano" value="Isoflurano"
-                    readonly />
-            </div>
-            <div class="medicamento-col-man">
-                <h3>Volume (mL)</h3>
-                <input type="text" class="valores-input" id="doseIsoflurano" name="doseIsoflurano"
-                    value="Taxa Variável " />
-            </div>
-        </div>
-        <h4>Pós-Operatório</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nome" name="nome" value="" readonly />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseMin" name="doseMin" />
-            </div>
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseMax" name="doseMax" />
-            </div>
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracao" name="concentracao" />
-            </div>
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="" readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeMin" name="volumeMin" readonly />
-            </div>
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeMax" name="volumeMax" readonly />
-            </div>
-        </div>
-
         <div id="mensagemAlerta"></div>
         <button class="botao-voltar" onclick="voltar()">◀︎ VOLTAR</button>
         <footer>
@@ -768,6 +812,7 @@
         }
         function iniciarProtocolos() {
             document.getElementById('animal').value = 'selecione';
+            document.getElementById('mostrarProtocolo').value = 'selecione';
             document.getElementById('pesoAnimal').value = '';
             document.getElementById('concentracaoDexmedetomidina').value = '';
             document.getElementById('concentracaoMetadona').value = '';
@@ -795,12 +840,63 @@
             document.getElementById('doseLidocainaMin').value = '';
             document.getElementById('doseLidocainaMax').value = '';
             document.getElementById('mensagemAlerta').style.display = 'none';
+            document.getElementById('mpa').style.display = "none";
+            document.getElementById('inducaoanestesica').style.display = "none";
+            document.getElementById('bloqueioregional').style.display = "none";
+            document.getElementById('manutencaoanestesica').style.display = "none";
+            document.getElementById('posoperatorio').style.display = "none";
         }
         function voltar() {
             window.location.href = 'index.html';
         }
-    </script>
+        document.getElementById("mostrarProtocolo").addEventListener("change", function () {
+            var selecao = document.getElementById("mostrarProtocolo").value;
+            var mpa = document.getElementById("mpa");
+            var inducaoanestesica = document.getElementById("inducaoanestesica");
+            var bloqueioregional = document.getElementById("bloqueioregional");
+            var manutencaoanestesica = document.getElementById("manutencaoanestesica");
+            var posoperatorio = document.getElementById("posoperatorio");
+            if (selecao === "mpa") {
+                mpa.style.display = "block";
+                inducaoanestesica.style.display = "none";
+                bloqueioregional.style.display = "none";
+                manutencaoanestesica.style.display = "none";
+                posoperatorio.style.display = "none";
 
+            } else if (selecao === "inducaoanestesica") {
+                mpa.style.display = "none";
+                inducaoanestesica.style.display = "block";
+                bloqueioregional.style.display = "none";
+                manutencaoanestesica.style.display = "none";
+                posoperatorio.style.display = "none";
+            } else if (selecao === "bloqueioregional") {
+                mpa.style.display = "none";
+                inducaoanestesica.style.display = "none";
+                bloqueioregional.style.display = "block";
+                manutencaoanestesica.style.display = "none";
+                posoperatorio.style.display = "none";
+            } else if (selecao === "manutencaoanestesica") {
+                mpa.style.display = "none";
+                inducaoanestesica.style.display = "none";
+                bloqueioregional.style.display = "none";
+                manutencaoanestesica.style.display = "block";
+                posoperatorio.style.display = "none";
+            } else if (selecao === "posoperatorio") {
+                mpa.style.display = "none";
+                inducaoanestesica.style.display = "none";
+                bloqueioregional.style.display = "none";
+                manutencaoanestesica.style.display = "none";
+                posoperatorio.style.display = "block";
+            } else {
+                mpa.style.display = "none";
+                inducaoanestesica.style.display = "none";
+                bloqueioregional.style.display = "none";
+                manutencaoanestesica.style.display = "none";
+                posoperatorio.style.display = "none";
+            }
+        });
+
+    </script>
 </body>
 
 </html>
