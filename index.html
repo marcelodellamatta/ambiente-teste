@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="./images/vite.svg" />
-    <title>Calculadora Veterinária</title>
-
+    <title>Fármacos de Emergência</title>
     <script>
         document.addEventListener("contextmenu", function (e) {
             e.preventDefault();
         });
-
         document.addEventListener("keydown", function (e) {
             if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
                 e.preventDefault();
@@ -138,9 +136,12 @@
         }
 
         @keyframes blink {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
             }
+
             50% {
                 opacity: 0.5;
             }
@@ -202,7 +203,6 @@
             text-decoration: none;
             font-size: 12px;
             margin: 0 5px;
-
             display: flex;
             align-items: center;
             justify-content: center;
@@ -249,10 +249,8 @@
             background-color: #f1f1f1;
             border-radius: 10px;
             padding: 20px;
-
             text-align: center;
             max-width: 70%;
-
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -292,12 +290,12 @@
         .dose-col,
         .volume-col,
         .viaadmin-col {
-            width: calc(17% - 30px);
+            width: calc(17% - 26px);
             box-sizing: border-box;
         }
 
         .medicamento-col {
-            width: calc(26% - 20px);
+            width: calc(24% - 20px);
             box-sizing: border-box;
         }
 
@@ -341,7 +339,7 @@
         .dose-col p,
         .volume-col p,
         .viaadmin-col p {
-            font-size: 16px;
+            font-size: 20px;
             margin: 0;
         }
 
@@ -350,7 +348,7 @@
             margin-bottom: 8px;
             font-weight: bold;
             text-align: center;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .resultado {
@@ -423,473 +421,808 @@
             border-radius: 6px;
             font-size: 15px;
         }
-
-        
-
     </style>
-
     <title>Protocolos</title>
 </head>
 
 <body>
-
     <div class="container">
         <img class="carousel-image" src="./images/calculadorahome.jpg" alt="home" id="imagemRecarregar"
             style="cursor: pointer;">
-        <h5>Orquiectomia em Cães e Gatos Hígidos</h5>
-
+        <h5>Fármacos de Emergência</h5>
         <div class="calculadora-container-mensa">
             <li>Protocolo sugerido pelo Médico Veterinário Marcelo Della Matta, CRMV-PR 00000</li>
-            <li>Em caso de necessidade, ajuste os valores de doses e concentrações dos fármacos para alcançar resultados de acordo com sua preferência.</li>
-            <li>Para melhor visualização, recomendamos tela maior que 640px ou visualize horizontalmente no smartphone.</li>
-
+            <li>Em caso de necessidade, ajuste os valores de doses e concentrações dos fármacos para alcançar resultados
+                de acordo com sua preferência.</li>
+            <li>Para melhor visualização, recomendamos tela maior que 640px ou visualize horizontalmente no smartphone.
+            </li>
         </div>
-
         <div class="seletor-animal">
             <label for="animal">Selecione o Animal:</label>
-            <select id="animal" name="animal" onchange="ajustarDosesFarmacos(); limparResultadosAoTrocarAnimal();">
+            <select id="animal" name="animal"
+                onchange="ajustarDosesFarmacos(); ajustarConcentracaoFarmacos(); limparResultadosAoTrocarAnimal();">
                 <option value="selecione">Selecione</option>
                 <option value="cao">Cão</option>
                 <option value="gato">Gato</option>
             </select>
         </div>
-
         <div class="calculadora-container">
             <label class="input-label" for="pesoAnimal">Peso do Animal:</label>
             <input type="number" id="pesoAnimal" name="pesoAnimal" placeholder="Digite o peso do animal" />
         </div>
-
-        <h4>Medicação Pré Anestésica</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeDexmedetomidina" name="nomeDexmedetomidina" value="Dexmedetomidina" readonly />
-                <input type="text" class="valores-input" id="nomeMetadona" name="nomeMetadona" value="Metadona" readonly />
-            </div>
-
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseDexmedetomidinaMin" name="doseDexmedetomidinaMin" />
-                <input type="text" class="valores-input" id="doseMetadonaMin" name="doseMetadonaMin" />
-            </div>
-
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseDexmedetomidinaMax" name="doseDexmedetomidinaMax" />
-                <input type="text" class="valores-input" id="doseMetadonaMax" name="doseMetadonaMax" />
-            </div>
-
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoDexmedetomidina" name="concentracaoDexmedetomidina" value="0.5" />
-                <input type="text" class="valores-input" id="concentracaoMetadona" name="concentracaoMetadona" value="10" />
-            </div>
-
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IM" readonly />
-            </div>
-
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeDexmedetomidinaMin" name="volumeDexmedetomidinaMin" readonly />
-                <input type="text" class="valores-input resultado" id="volumeMetadonaMin" name="volumeMetadonaMin" readonly />
-            </div>
-
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeDexmedetomidinaMax" name="volumeDexmedetomidinaMax" readonly />
-                <input type="text" class="valores-input resultado" id="volumeMetadonaMax" name="volumeMetadonaMax" readonly />
-            </div>
-
-        </div>
-
-        <h4>Indução Anestésica</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeCetamina" name="nomeCetamina" value="Cetamina" readonly />
-                <input type="text" class="valores-input" id="nomePropofol" name="nomePropofol" value="Propofol" readonly />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseCetaminaMin" name="doseCetaminaMin" />
-                <input type="text" class="valores-input" id="dosePropofolMin" name="dosePropofolMin" />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseCetaminaMax" name="doseCetaminaMax" />
-                <input type="text" class="valores-input" id="dosePropofolMax" name="dosePropofolMax" />
-            </div>
-            
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoCetamina" name="concentracaoCetamina" value="100" />
-                <input type="text" class="valores-input" id="concentracaoPropofol" name="concentracaoPropofol" value="10" />
-            </div>
-            
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadminCetamina" name="viadeadminCetamina" value="IV" readonly />
-                <input type="text" class="valores-input " id="viadeadminPropofol" name="viadeadminPropofol" value="IV" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeCetaminaMin" name="volumeCetaminaMin" readonly />
-                <input type="text" class="valores-input resultado" id="volumePropofolMin" name="volumePropofolMin" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeCetaminaMax" name="volumeCetaminaMax" readonly />
-                <input type="text" class="valores-input resultado" id="volumePropofolMax" name="volumePropofolMax" readonly />
-            </div>
-            
-        </div>
-
-        <h4>Bloqueio Locorregional</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína" readonly />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseLidocainaMin" name="doseLidocainaMin" />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseLidocainaMax" name="doseLidocainaMax" />
-            </div>
-            
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina" value="20" />
-            </div>
-            
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadminLidocaina" name="viadeadminLidocaina" value="IT" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeLidocainaMin" name="volumeLidocainaMin" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax" readonly />
-            </div>
-
-            <div class="calculadora-container-legenda"><li>Volume a ser administrado por ponto de Lidocaína Intratesticular</li>
-            </div>
-        </div>
-        
-        <h4>Manutenção Anestésica</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nomeIsoflurano" name="nomeIsoflurano" value="Isoflurano" readonly />
-               
-            </div>
-
-            <div class="medicamento-col-man">
-                <h3>Volume (mL)</h3>
-                <input type="text" class="valores-input" id="doseIsoflurano" name="doseIsoflurano" value="Taxa Variável " />
-              
-            </div>
-
-                
-            </div>
-
-            <h4>Pós-Operatório</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nome" name="nome" value="" readonly />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseMin" name="doseMin" />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseMax" name="doseMax" />
-            </div>
-            
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracao" name="concentracao" value="" />
-            </div>
-            
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeMin" name="volumeMin" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeMax" name="volumeMax" readonly />
-            </div>
-            
-        </div>
-
-        <h4>Emergências</h4>
-        <div class="calculadora-container">
-            <div class="medicamento-col">
-                <h3>Fármaco</h3>
-                <input type="text" class="valores-input" id="nome" name="nome" value="" readonly />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Min</h3>
-                <input type="text" class="valores-input" id="doseMin" name="doseMin" />
-            </div>
-            
-            <div class="dose-col">
-                <h3>D: (mg/kg) - Max</h3>
-                <input type="text" class="valores-input" id="doseMax" name="doseMax" />
-            </div>
-            
-            <div class="concentracao-col">
-                <h3>Conc. (mg/mL)</h3>
-                <input type="text" class="valores-input" id="concentracao" name="concentracao" value="" />
-            </div>
-            
-            <div class="viaadmin-col">
-                <h3>Via de Admin</h3>
-                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Min</h3>
-                <input type="text" class="valores-input resultado" id="volumeMin" name="volumeMin" readonly />
-            </div>
-            
-            <div class="volume-col">
-                <h3>V: (mL) - Max</h3>
-                <input type="text" class="valores-input resultado" id="volumeMax" name="volumeMax" readonly />
-            </div>
-            
-        </div>
-
         <div class="btn-container">
             <button class="limpar-btn" onclick="limparResultados()">Limpar</button>
             <button class="reiniciar-btn" onclick="iniciarProtocolos()">Reiniciar</button>
             <button onclick="calcularVolumes()">Calcular</button>
         </div>
+        <h4>Bradicardia Sinusal - Tratamento Inicial</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeEscopolamina" name="nomeEscopolamina"
+                    value="Escopolamina" readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseEscopolaminaMin" name="doseEscopolaminaMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseEscopolaminaMax" name="doseEscopolaminaMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoEscopolamina"
+                    name="concentracaoEscopolamina" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeEscopolaminaMin"
+                    name="volumeEscopolaminaMin" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeEscopolaminaMax"
+                    name="volumeEscopolaminaMax" readonly />
+
+            </div>
+            <div class="calculadora-container-legenda">
+                <li>Não recomendado para gatos</li>
+            </div>
+        </div>
+        <h4>Bradicardia Sinusal - Persistente</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeAtropina" name="nomeAtropina" value="Atropina"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseAtropinaMin" name="doseAtropinaMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseAtropinaMax" name="doseAtropinaMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoAtropina" name="concentracaoAtropina" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeAtropinaMin" name="volumeAtropinaMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeAtropinaMax" name="volumeAtropinaMax"
+                    readonly />
+
+            </div>
+        </div>
+
+        <h4>Paradas Cadiorrespiratórias </h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeAdrenalina" name="nomeAdrenalina" value="Adrenalina"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseAdrenalinaMin" name="doseAdrenalinaMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseAdrenalinaMax" name="doseAdrenalinaMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoAdrenalina" name="concentracaoAdrenalina" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeAdrenalinaMin" name="volumeAdrenalinaMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeAdrenalinaMax" name="volumeAdrenalinaMax"
+                    readonly />
+
+            </div>
+            <div class="calculadora-container-legenda">
+                <li>Volume a ser administrado a cada 5 minutos</li>
+            </div>
+        </div>
+
+        <h4>Arritmias</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeLidocaina" name="nomeLidocaina" value="Lidocaína"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseLidocainaMin" name="doseLidocainaMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseLidocainaMax" name="doseLidocainaMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoLidocaina" name="concentracaoLidocaina" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeLidocainaMin" name="volumeLidocainaMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeLidocainaMax" name="volumeLidocainaMax"
+                    readonly />
+
+            </div>
+            <div class="calculadora-container-legenda">
+                <li>Não usar em bradiarritmias</li>
+            </div>
+        </div>
+
+        <h4>Reversor de Opioides</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeNaloxona" name="nomeNaloxona" value="Naloxona"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseNaloxonaMin" name="doseNaloxonaMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseNaloxonaMax" name="doseNaloxonaMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoNaloxona" name="concentracaoNaloxona" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/IM/SC" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeNaloxonaMin" name="volumeNaloxonaMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeNaloxonaMax" name="volumeNaloxonaMax"
+                    readonly />
+
+            </div>
+        </div>
+
+        <h4>Reversor de Benzodiazepínicos</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeFlumazenil" name="nomeFlumazenil" value="Flumazenil"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseFlumazenilMin" name="doseFlumazenilMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseFlumazenilMax" name="doseFlumazenilMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoFlumazenil" name="concentracaoFlumazenil" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeFlumazenilMin" name="volumeFlumazenilMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeFlumazenilMax" name="volumeFlumazenilMax"
+                    readonly />
+
+            </div>
+        </div>
+
+        <h4>Reversor de Alfa2 Agonistas</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeAtipamezole" name="nomeAtipamezole" value="Atipamezole"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseAtipamezoleMin" name="doseAtipamezoleMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseAtipamezoleMax" name="doseAtipamezoleMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoAtipamezole" name="concentracaoAtipamezole" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/IM/SC" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeAtipamezoleMin" name="volumeAtipamezoleMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeAtipamezoleMax" name="volumeAtipamezoleMax"
+                    readonly />
+
+            </div>
+            <div class="calculadora-container-legenda">
+                <li>Quando se usa dexdomitor e antisedan, o volume para cães é o mesmo, e para gatos é a metade do
+                    volume.</li>
+            </div>
+        </div>
+
+        <h4>Depressão Respiratória</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeDoxapran" name="nomeDoxapran" value="Doxapram"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseDoxapranMin" name="doseDoxapranMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseDoxapranMax" name="doseDoxapranMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoDoxapran" name="concentracaoDoxapran" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeDoxapranMin" name="volumeDoxapranMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeDoxapranMax" name="volumeDoxapranMax"
+                    readonly />
+
+            </div>
+        </div>
+
+        <h4>Quadros Convulsivos</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeDiazepam" name="nomeDiazepam" value="Diazepam"
+                    readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseDiazepamMin" name="doseDiazepamMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseDiazepamMax" name="doseDiazepamMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoDiazepam" name="concentracaoDiazepam" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV/R" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeDiazepamMin" name="volumeDiazepamMin"
+                    readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeDiazepamMax" name="volumeDiazepamMax"
+                    readonly />
+
+            </div>
+        </div>
+
+        <h4>Quadros Convulsivos – Persistentes</h4>
+        <div class="calculadora-container">
+            <div class="medicamento-col">
+                <h3>Fármaco</h3>
+                <input type="text" class="valores-input" id="nomeFenobarbital" name="nomeFenobarbital"
+                    value="Fenobarbital" readonly />
+                <input type="text" class="valores-input" id="nomeFenobarbitalM" name="nomeFenobarbitalM"
+                    value="*Fenobarbital" readonly />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Min</h3>
+                <input type="text" class="valores-input" id="doseFenobarbitalMin" name="doseFenobarbitalMin" />
+                <input type="text" class="valores-input" id="doseFenobarbitalMMin" name="doseFenobarbitalMMin" />
+
+            </div>
+            <div class="dose-col">
+                <h3>D: (mg/kg) - Max</h3>
+                <input type="text" class="valores-input" id="doseFenobarbitalMax" name="doseFenobarbitalMax" />
+                <input type="text" class="valores-input" id="doseFenobarbitalMMax" name="doseFenobarbitalMMax" />
+
+            </div>
+            <div class="concentracao-col">
+                <h3>Conc. (mg/mL)</h3>
+                <input type="text" class="valores-input" id="concentracaoFenobarbital"
+                    name="concentracaoFenobarbital" />
+                <input type="text" class="valores-input" id="concentracaoFenobarbitalM"
+                    name="concentracaoFenobarbitalM" />
+
+            </div>
+            <div class="viaadmin-col">
+                <h3>Via de Admin</h3>
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+                <input type="text" class="valores-input " id="viadeadmin" name="viadeadmin" value="IV" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Min</h3>
+                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMin"
+                    name="volumeFenobarbitalMin" readonly />
+                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMMin"
+                    name="volumeFenobarbitalMMin" readonly />
+
+            </div>
+            <div class="volume-col">
+                <h3>V: (mL) - Max</h3>
+                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMax"
+                    name="volumeFenobarbitalMax" readonly />
+                <input type="text" class="valores-input resultado" id="volumeFenobarbitalMMax"
+                    name="volumeFenobarbitalMMax" readonly />
+
+            </div>
+            <div class="calculadora-container-legenda">
+                <li>*Dose de manutenção , podendo ser feito IM após controle do quadro.</li>
+            </div>
+        </div>
+
 
         <div id="mensagemAlerta"></div>
-
         <button class="botao-voltar" onclick="voltar()">◀︎ VOLTAR</button>
-
         <footer>
             © 2024 Marcelo Della Matta
         </footer>
     </div>
-
     <script>
         function ajustarDosesFarmacos() {
             var tipoAnimal = document.getElementById('animal').value;
-            var doseDexmedetomidinaMin = document.getElementById('doseDexmedetomidinaMin');
-            var doseDexmedetomidinaMax = document.getElementById('doseDexmedetomidinaMax');
-            var doseMetadonaMin = document.getElementById('doseMetadonaMin');
-            var doseMetadonaMax = document.getElementById('doseMetadonaMax');
-            var doseCetaminaMin = document.getElementById('doseCetaminaMin');
-            var doseCetaminaMax = document.getElementById('doseCetaminaMax');
-            var dosePropofolMin = document.getElementById('dosePropofolMin');
-            var dosePropofolMax = document.getElementById('dosePropofolMax');
+            var doseEscopolaminaMin = document.getElementById('doseEscopolaminaMin');
+            var doseEscopolaminaMax = document.getElementById('doseEscopolaminaMax');
+            var doseAtropinaMin = document.getElementById('doseAtropinaMin');
+            var doseAtropinaMax = document.getElementById('doseAtropinaMax');
+            var doseAdrenalinaMin = document.getElementById('doseAdrenalinaMin');
+            var doseAdrenalinaMax = document.getElementById('doseAdrenalinaMax');
             var doseLidocainaMin = document.getElementById('doseLidocainaMin');
             var doseLidocainaMax = document.getElementById('doseLidocainaMax');
-
-            
-
+            var doseNaloxonaMin = document.getElementById('doseNaloxonaMin');
+            var doseNaloxonaMax = document.getElementById('doseNaloxonaMax');
+            var doseFlumazenilMin = document.getElementById('doseFlumazenilMin');
+            var doseFlumazenilMax = document.getElementById('doseFlumazenilMax');
+            var doseAtipamezoleMin = document.getElementById('doseAtipamezoleMin');
+            var doseAtipamezoleMax = document.getElementById('doseAtipamezoleMax');
+            var doseDoxapranMin = document.getElementById('doseDoxapranMin');
+            var doseDoxapranMax = document.getElementById('doseDoxapranMax');
+            var doseDiazepamMin = document.getElementById('doseDiazepamMin');
+            var doseDiazepamMax = document.getElementById('doseDiazepamMax');
+            var doseFenobarbitalMin = document.getElementById('doseFenobarbitalMin');
+            var doseFenobarbitalMax = document.getElementById('doseFenobarbitalMax');
+            var doseFenobarbitalMMin = document.getElementById('doseFenobarbitalMMin');
+            var doseFenobarbitalMMax = document.getElementById('doseFenobarbitalMMax');
             if (tipoAnimal === 'cao') {
-                doseDexmedetomidinaMin.value = '0.001';
-                doseDexmedetomidinaMax.value = '0.003';
-                doseMetadonaMin.value = '0.2';
-                doseMetadonaMax.value = '0.3';
-                doseCetaminaMin.value = '1';
-                doseCetaminaMax.value = '2';
-                dosePropofolMin.value = '1';
-                dosePropofolMax.value = '4';
-                doseLidocainaMin.value = '1';
-                doseLidocainaMax.value = '2';
-                
+                doseEscopolaminaMin.value = (0.3).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseEscopolaminaMax.value = (0.3).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtropinaMin.value = (0.02).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtropinaMax.value = (0.04).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAdrenalinaMin.value = (0.01).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAdrenalinaMax.value = (0.01).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseLidocainaMin.value = (2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseLidocainaMax.value = (4).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseNaloxonaMin.value = (0.01).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseNaloxonaMax.value = (0.04).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFlumazenilMin.value = (0.2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFlumazenilMax.value = (0.2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtipamezoleMin.value = (0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtipamezoleMax.value = (0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDoxapranMin.value = (5).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDoxapranMax.value = (10).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDiazepamMin.value = (0.5).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDiazepamMax.value = (1).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMin.value = (10).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMax.value = (20).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMMin.value = (2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMMax.value = (4).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             } else if (tipoAnimal === 'gato') {
-                doseDexmedetomidinaMin.value = '0.005';
-                doseDexmedetomidinaMax.value = '0.01';
-                doseMetadonaMin.value = '0.2';
-                doseMetadonaMax.value = '0.3';
-                doseCetaminaMin.value = '1';
-                doseCetaminaMax.value = '2';
-                dosePropofolMin.value = '1';
-                dosePropofolMax.value = '4';
-                doseLidocainaMin.value = '1';
-                doseLidocainaMax.value = '2';   
-                
+                doseEscopolaminaMin.value = (0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseEscopolaminaMax.value = (0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtropinaMin.value = (0.02).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtropinaMax.value = (0.04).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAdrenalinaMin.value = (0.01).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAdrenalinaMax.value = (0.01).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseLidocainaMin.value = (2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseLidocainaMax.value = (4).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseNaloxonaMin.value = (0.01).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseNaloxonaMax.value = (0.04).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFlumazenilMin.value = (0.2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFlumazenilMax.value = (0.2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtipamezoleMin.value = (0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseAtipamezoleMax.value = (0).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDoxapranMin.value = (5).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDoxapranMax.value = (10).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDiazepamMin.value = (0.5).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseDiazepamMax.value = (1).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMin.value = (10).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMax.value = (20).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMMin.value = (2).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                doseFenobarbitalMMax.value = (4).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             }
-            
         }
-
+        function ajustarConcentracaoFarmacos() {
+            var tipoAnimal = document.getElementById('animal').value;
+            var concentracaoEscopolamina = document.getElementById('concentracaoEscopolamina');
+            var concentracaoAtropina = document.getElementById('concentracaoAtropina');
+            var concentracaoAdrenalina = document.getElementById('concentracaoAdrenalina');
+            var concentracaoLidocaina = document.getElementById('concentracaoLidocaina');
+            var concentracaoNaloxona = document.getElementById('concentracaoNaloxona');
+            var concentracaoFlumazenil = document.getElementById('concentracaoFlumazenil');
+            var concentracaoAtipamezole = document.getElementById('concentracaoAtipamezole');
+            var concentracaoDoxapran = document.getElementById('concentracaoDoxapran');
+            var concentracaoDiazepam = document.getElementById('concentracaoDiazepam');
+            var concentracaoFenobarbital = document.getElementById('concentracaoFenobarbital');
+            var concentracaoFenobarbitalM = document.getElementById('concentracaoFenobarbitalM');
+            if (tipoAnimal === 'cao' || tipoAnimal === 'gato') {
+                concentracaoEscopolamina.value = (20).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoAtropina.value = (10).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoAdrenalina.value = (1).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoLidocaina.value = (20).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoNaloxona.value = (0.4).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoFlumazenil.value = (0.1).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoAtipamezole.value = (5).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoDoxapran.value = (20).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoDiazepam.value = (5).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoFenobarbital.value = (200).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                concentracaoFenobarbitalM.value = (200).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+            }
+        }
         function calcularVolumes() {
-            var pesoAnimal = parseFloat(document.getElementById('pesoAnimal').value);
-            var doseDexmedetomidinaMin = parseFloat(document.getElementById('doseDexmedetomidinaMin').value);
-            var doseDexmedetomidinaMax = parseFloat(document.getElementById('doseDexmedetomidinaMax').value);
-            var doseMetadonaMin = parseFloat(document.getElementById('doseMetadonaMin').value);
-            var doseMetadonaMax = parseFloat(document.getElementById('doseMetadonaMax').value);
-            var doseCetaminaMin = parseFloat(document.getElementById('doseCetaminaMin').value);
-            var doseCetaminaMax = parseFloat(document.getElementById('doseCetaminaMax').value);
-            var dosePropofolMin = parseFloat(document.getElementById('dosePropofolMin').value);
-            var dosePropofolMax = parseFloat(document.getElementById('dosePropofolMax').value);
-            var doseLidocainaMin = parseFloat(document.getElementById('doseLidocainaMin').value);
-            var doseLidocainaMax = parseFloat(document.getElementById('doseLidocainaMax').value);
-
-
-            
-
-            var concentracaoDexmedetomidina = parseFloat(document.getElementById('concentracaoDexmedetomidina').value);
-            var concentracaoMetadona = parseFloat(document.getElementById('concentracaoMetadona').value);
-            var concentracaoCetamina = parseFloat(document.getElementById('concentracaoCetamina').value);
-            var concentracaoPropofol = parseFloat(document.getElementById('concentracaoPropofol').value);
-            var concentracaoLidocaina = parseFloat(document.getElementById('concentracaoLidocaina').value);
-
-
-
-
-            if (isNaN(pesoAnimal) || isNaN(doseDexmedetomidinaMin) || isNaN(doseDexmedetomidinaMax) || isNaN(concentracaoDexmedetomidina) || isNaN(doseMetadonaMin) || 
-            isNaN(doseMetadonaMax) || isNaN(concentracaoMetadona) || isNaN(doseCetaminaMin) || isNaN(doseCetaminaMax) || isNaN(concentracaoCetamina) || isNaN(dosePropofolMin) || 
-            isNaN(dosePropofolMax) || isNaN(concentracaoPropofol) || isNaN(doseLidocainaMin) || isNaN(doseLidocainaMax) || isNaN(concentracaoLidocaina) ) {
+            var pesoAnimal = parseFloat(document.getElementById('pesoAnimal').value.replace(',', '.'));
+            var doseEscopolaminaMin = parseFloat(document.getElementById('doseEscopolaminaMin').value.replace(',', '.'));
+            var doseEscopolaminaMax = parseFloat(document.getElementById('doseEscopolaminaMax').value.replace(',', '.'));
+            var doseAtropinaMin = parseFloat(document.getElementById('doseAtropinaMin').value.replace(',', '.'));
+            var doseAtropinaMax = parseFloat(document.getElementById('doseAtropinaMax').value.replace(',', '.'));
+            var doseAdrenalinaMin = parseFloat(document.getElementById('doseAdrenalinaMin').value.replace(',', '.'));
+            var doseAdrenalinaMax = parseFloat(document.getElementById('doseAdrenalinaMax').value.replace(',', '.'));
+            var doseLidocainaMin = parseFloat(document.getElementById('doseLidocainaMin').value.replace(',', '.'));
+            var doseLidocainaMax = parseFloat(document.getElementById('doseLidocainaMax').value.replace(',', '.'));
+            var doseNaloxonaMin = parseFloat(document.getElementById('doseNaloxonaMin').value.replace(',', '.'));
+            var doseNaloxonaMax = parseFloat(document.getElementById('doseNaloxonaMax').value.replace(',', '.'));
+            var doseFlumazenilMin = parseFloat(document.getElementById('doseFlumazenilMin').value.replace(',', '.'));
+            var doseFlumazenilMax = parseFloat(document.getElementById('doseFlumazenilMax').value.replace(',', '.'));
+            var doseAtipamezoleMin = parseFloat(document.getElementById('doseAtipamezoleMin').value.replace(',', '.'));
+            var doseAtipamezoleMax = parseFloat(document.getElementById('doseAtipamezoleMax').value.replace(',', '.'));
+            var doseDoxapranMin = parseFloat(document.getElementById('doseDoxapranMin').value.replace(',', '.'));
+            var doseDoxapranMax = parseFloat(document.getElementById('doseDoxapranMax').value.replace(',', '.'));
+            var doseDiazepamMin = parseFloat(document.getElementById('doseDiazepamMin').value.replace(',', '.'));
+            var doseDiazepamMax = parseFloat(document.getElementById('doseDiazepamMax').value.replace(',', '.'));
+            var doseFenobarbitalMin = parseFloat(document.getElementById('doseFenobarbitalMin').value.replace(',', '.'));
+            var doseFenobarbitalMax = parseFloat(document.getElementById('doseFenobarbitalMax').value.replace(',', '.'));
+            var doseFenobarbitalMMin = parseFloat(document.getElementById('doseFenobarbitalMMin').value.replace(',', '.'));
+            var doseFenobarbitalMMax = parseFloat(document.getElementById('doseFenobarbitalMMax').value.replace(',', '.'));
+            var concentracaoEscopolamina = parseFloat(document.getElementById('concentracaoEscopolamina').value.replace(',', '.'));
+            var concentracaoAtropina = parseFloat(document.getElementById('concentracaoAtropina').value.replace(',', '.'));
+            var concentracaoAdrenalina = parseFloat(document.getElementById('concentracaoAdrenalina').value.replace(',', '.'));
+            var concentracaoLidocaina = parseFloat(document.getElementById('concentracaoLidocaina').value.replace(',', '.'));
+            var concentracaoNaloxona = parseFloat(document.getElementById('concentracaoNaloxona').value.replace(',', '.'));
+            var concentracaoFlumazenil = parseFloat(document.getElementById('concentracaoFlumazenil').value.replace(',', '.'));
+            var concentracaoAtipamezole = parseFloat(document.getElementById('concentracaoAtipamezole').value.replace(',', '.'));
+            var concentracaoDoxapran = parseFloat(document.getElementById('concentracaoDoxapran').value.replace(',', '.'));
+            var concentracaoDiazepam = parseFloat(document.getElementById('concentracaoDiazepam').value.replace(',', '.'));
+            var concentracaoFenobarbital = parseFloat(document.getElementById('concentracaoFenobarbital').value.replace(',', '.'));
+            var concentracaoFenobarbitalM = parseFloat(document.getElementById('concentracaoFenobarbitalM').value.replace(',', '.'));
+            var mensagemAlerta = document.getElementById('mensagemAlerta');
+            if (isNaN(pesoAnimal) || isNaN(doseEscopolaminaMin) || isNaN(doseEscopolaminaMax) || isNaN(concentracaoEscopolamina) || isNaN(doseAtropinaMin) || isNaN(doseAtropinaMax) || isNaN(concentracaoAtropina) ||
+                isNaN(doseAdrenalinaMin) || isNaN(doseAdrenalinaMax) || isNaN(concentracaoAdrenalina) || isNaN(doseLidocainaMin) || isNaN(doseLidocainaMax) || isNaN(concentracaoLidocaina) ||
+                isNaN(doseNaloxonaMin) || isNaN(doseNaloxonaMax) || isNaN(concentracaoNaloxona) || isNaN(doseFlumazenilMin) || isNaN(doseFlumazenilMax) || isNaN(concentracaoFlumazenil) ||
+                isNaN(doseAtipamezoleMin) || isNaN(doseAtipamezoleMax) || isNaN(concentracaoAtipamezole) || isNaN(doseDoxapranMin) || isNaN(doseDoxapranMax) || isNaN(concentracaoDoxapran) ||
+                isNaN(doseDiazepamMin) || isNaN(doseDiazepamMax) || isNaN(concentracaoDiazepam) || isNaN(doseFenobarbitalMin) || isNaN(doseFenobarbitalMax) || isNaN(concentracaoFenobarbital) || isNaN(doseFenobarbitalMMin) || isNaN(doseFenobarbitalMMax) || isNaN(concentracaoFenobarbitalM)) {
                 mensagemAlerta.innerText = "Preencha todos os campos corretamente.";
                 mensagemAlerta.style.display = 'block';
             } else {
                 mensagemAlerta.innerText = "";
                 mensagemAlerta.style.display = 'none';
             }
-
-            var volumeDexmedetomidinaMin = (pesoAnimal * doseDexmedetomidinaMin) / concentracaoDexmedetomidina;
-            var volumeDexmedetomidinaMax = (pesoAnimal * doseDexmedetomidinaMax) / concentracaoDexmedetomidina;
-            var volumeMetadonaMin = (pesoAnimal * doseMetadonaMin) / concentracaoMetadona;
-            var volumeMetadonaMax = (pesoAnimal * doseMetadonaMax) / concentracaoMetadona;
-            var volumeCetaminaMin = (pesoAnimal * doseCetaminaMin) / concentracaoCetamina;
-            var volumeCetaminaMax = (pesoAnimal * doseCetaminaMax) / concentracaoCetamina;
-            var volumePropofolMin = (pesoAnimal * dosePropofolMin) / concentracaoPropofol;
-            var volumePropofolMax = (pesoAnimal * dosePropofolMax) / concentracaoPropofol;
+            var volumeEscopolaminaMin = (pesoAnimal * doseEscopolaminaMin) / concentracaoEscopolamina;
+            var volumeEscopolaminaMax = (pesoAnimal * doseEscopolaminaMax) / concentracaoEscopolamina;
+            var volumeAtropinaMin = (pesoAnimal * doseAtropinaMin) / concentracaoAtropina;
+            var volumeAtropinaMax = (pesoAnimal * doseAtropinaMax) / concentracaoAtropina;
+            var volumeAdrenalinaMin = (pesoAnimal * doseAdrenalinaMin) / concentracaoAdrenalina;
+            var volumeAdrenalinaMax = (pesoAnimal * doseAdrenalinaMax) / concentracaoAdrenalina;
             var volumeLidocainaMin = (pesoAnimal * doseLidocainaMin) / concentracaoLidocaina;
             var volumeLidocainaMax = (pesoAnimal * doseLidocainaMax) / concentracaoLidocaina;
-
-
-           
-
-            document.getElementById('volumeDexmedetomidinaMin').value = volumeDexmedetomidinaMin.toFixed(2);
-            document.getElementById('volumeDexmedetomidinaMax').value = volumeDexmedetomidinaMax.toFixed(2);
-            document.getElementById('volumeMetadonaMin').value = volumeMetadonaMin.toFixed(2);
-            document.getElementById('volumeMetadonaMax').value = volumeMetadonaMax.toFixed(2);
-            document.getElementById('volumeCetaminaMin').value = volumeCetaminaMin.toFixed(2);
-            document.getElementById('volumeCetaminaMax').value = volumeCetaminaMax.toFixed(2);
-            document.getElementById('volumePropofolMin').value = volumePropofolMin.toFixed(2);
-            document.getElementById('volumePropofolMax').value = volumePropofolMax.toFixed(2);
-            document.getElementById('volumeLidocainaMin').value = volumeLidocainaMin.toFixed(2);
-            document.getElementById('volumeLidocainaMax').value = volumeLidocainaMax.toFixed(2);
-
-
-            
+            var volumeNaloxonaMin = (pesoAnimal * doseNaloxonaMin) / concentracaoNaloxona;
+            var volumeNaloxonaMax = (pesoAnimal * doseNaloxonaMax) / concentracaoNaloxona;
+            var volumeFlumazenilMin = (pesoAnimal * doseFlumazenilMin) / concentracaoFlumazenil;
+            var volumeFlumazenilMax = (pesoAnimal * doseFlumazenilMax) / concentracaoFlumazenil;
+            var volumeAtipamezoleMin = (pesoAnimal * doseAtipamezoleMin) / concentracaoAtipamezole;
+            var volumeAtipamezoleMax = (pesoAnimal * doseAtipamezoleMax) / concentracaoAtipamezole;
+            var volumeDoxapranMin = (pesoAnimal * doseDoxapranMin) / concentracaoDoxapran;
+            var volumeDoxapranMax = (pesoAnimal * doseDoxapranMax) / concentracaoDoxapran;
+            var volumeDiazepamMin = (pesoAnimal * doseDiazepamMin) / concentracaoDiazepam;
+            var volumeDiazepamMax = (pesoAnimal * doseDiazepamMax) / concentracaoDiazepam;
+            var volumeFenobarbitalMin = (pesoAnimal * doseFenobarbitalMin) / concentracaoFenobarbital;
+            var volumeFenobarbitalMax = (pesoAnimal * doseFenobarbitalMax) / concentracaoFenobarbital;
+            var volumeFenobarbitalMMin = (pesoAnimal * doseFenobarbitalMMin) / concentracaoFenobarbitalM;
+            var volumeFenobarbitalMMax = (pesoAnimal * doseFenobarbitalMMax) / concentracaoFenobarbitalM;
+            function formatarVolume(volume) {
+                return (Math.floor(volume * 100) / 100).toLocaleString('pt-BR', {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                }).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+            document.getElementById('volumeEscopolaminaMin').value = formatarVolume(volumeEscopolaminaMin) + " mL";
+            document.getElementById('volumeEscopolaminaMax').value = formatarVolume(volumeEscopolaminaMax) + " mL";
+            document.getElementById('volumeAtropinaMin').value = formatarVolume(volumeAtropinaMin) + " mL";
+            document.getElementById('volumeAtropinaMax').value = formatarVolume(volumeAtropinaMax) + " mL";
+            document.getElementById('volumeAdrenalinaMin').value = formatarVolume(volumeAdrenalinaMin) + " mL";
+            document.getElementById('volumeAdrenalinaMax').value = formatarVolume(volumeAdrenalinaMax) + " mL";
+            document.getElementById('volumeLidocainaMin').value = formatarVolume(volumeLidocainaMin) + " mL";
+            document.getElementById('volumeLidocainaMax').value = formatarVolume(volumeLidocainaMax) + " mL";
+            document.getElementById('volumeNaloxonaMin').value = formatarVolume(volumeNaloxonaMin) + " mL";
+            document.getElementById('volumeNaloxonaMax').value = formatarVolume(volumeNaloxonaMax) + " mL";
+            document.getElementById('volumeFlumazenilMin').value = formatarVolume(volumeFlumazenilMin) + " mL";
+            document.getElementById('volumeFlumazenilMax').value = formatarVolume(volumeFlumazenilMax) + " mL";
+            document.getElementById('volumeAtipamezoleMin').value = formatarVolume(volumeAtipamezoleMin) + " mL";
+            document.getElementById('volumeAtipamezoleMax').value = formatarVolume(volumeAtipamezoleMax) + " mL";
+            document.getElementById('volumeDoxapranMin').value = formatarVolume(volumeDoxapranMin) + " mL";
+            document.getElementById('volumeDoxapranMax').value = formatarVolume(volumeDoxapranMax) + " mL";
+            document.getElementById('volumeDiazepamMin').value = formatarVolume(volumeDiazepamMin) + " mL";
+            document.getElementById('volumeDiazepamMax').value = formatarVolume(volumeDiazepamMax) + " mL";
+            document.getElementById('volumeFenobarbitalMin').value = formatarVolume(volumeFenobarbitalMin) + " mL";
+            document.getElementById('volumeFenobarbitalMax').value = formatarVolume(volumeFenobarbitalMax) + " mL";
+            document.getElementById('volumeFenobarbitalMMin').value = formatarVolume(volumeFenobarbitalMMin) + " mL";
+            document.getElementById('volumeFenobarbitalMMax').value = formatarVolume(volumeFenobarbitalMMax) + " mL";
         }
-
         function limparResultadosAoTrocarAnimal() {
-            document.getElementById('volumeDexmedetomidinaMin').value = '';
-            document.getElementById('volumeDexmedetomidinaMax').value = '';
-            document.getElementById('volumeMetadonaMin').value = '';
-            document.getElementById('volumeMetadonaMax').value = '';
-            document.getElementById('volumeCetaminaMin').value = '';
-            document.getElementById('volumeCetaminaMax').value = '';
-            document.getElementById('volumePropofolMin').value = '';
-            document.getElementById('volumePropofolMax').value = '';
+            document.getElementById('volumeEscopolaminaMin').value = '';
+            document.getElementById('volumeEscopolaminaMax').value = '';
+            document.getElementById('volumeAtropinaMin').value = '';
+            document.getElementById('volumeAtropinaMax').value = '';
+            document.getElementById('volumeAdrenalinaMin').value = '';
+            document.getElementById('volumeAdrenalinaMax').value = '';
             document.getElementById('volumeLidocainaMin').value = '';
             document.getElementById('volumeLidocainaMax').value = '';
-
-            
+            document.getElementById('volumeNaloxonaMin').value = '';
+            document.getElementById('volumeNaloxonaMax').value = '';
+            document.getElementById('volumeFlumazenilMin').value = '';
+            document.getElementById('volumeFlumazenilMax').value = '';
+            document.getElementById('volumeAtipamezoleMin').value = '';
+            document.getElementById('volumeAtipamezoleMax').value = '';
+            document.getElementById('volumeDoxapranMin').value = '';
+            document.getElementById('volumeDoxapranMax').value = '';
+            document.getElementById('volumeDiazepamMin').value = '';
+            document.getElementById('volumeDiazepamMax').value = '';
+            document.getElementById('volumeFenobarbitalMin').value = '';
+            document.getElementById('volumeFenobarbitalMax').value = '';
+            document.getElementById('volumeFenobarbitalMMin').value = '';
+            document.getElementById('volumeFenobarbitalMMax').value = '';
         }
-
         function limparResultados() {
             document.getElementById('pesoAnimal').value = '';
-
-            document.getElementById('volumeDexmedetomidinaMin').value = '';
-            document.getElementById('volumeDexmedetomidinaMax').value = '';
-            document.getElementById('volumeMetadonaMin').value = '';
-            document.getElementById('volumeMetadonaMax').value = '';
-            document.getElementById('volumeCetaminaMin').value = '';
-            document.getElementById('volumeCetaminaMax').value = '';
-            document.getElementById('volumePropofolMin').value = '';
-            document.getElementById('volumePropofolMax').value = '';
+            document.getElementById('volumeEscopolaminaMin').value = '';
+            document.getElementById('volumeEscopolaminaMax').value = '';
+            document.getElementById('volumeAtropinaMin').value = '';
+            document.getElementById('volumeAtropinaMax').value = '';
+            document.getElementById('volumeAdrenalinaMin').value = '';
+            document.getElementById('volumeAdrenalinaMax').value = '';
             document.getElementById('volumeLidocainaMin').value = '';
             document.getElementById('volumeLidocainaMax').value = '';
-
-            
-
+            document.getElementById('volumeNaloxonaMin').value = '';
+            document.getElementById('volumeNaloxonaMax').value = '';
+            document.getElementById('volumeFlumazenilMin').value = '';
+            document.getElementById('volumeFlumazenilMax').value = '';
+            document.getElementById('volumeAtipamezoleMin').value = '';
+            document.getElementById('volumeAtipamezoleMax').value = '';
+            document.getElementById('volumeDoxapranMin').value = '';
+            document.getElementById('volumeDoxapranMax').value = '';
+            document.getElementById('volumeDiazepamMin').value = '';
+            document.getElementById('volumeDiazepamMax').value = '';
+            document.getElementById('volumeFenobarbitalMin').value = '';
+            document.getElementById('volumeFenobarbitalMax').value = '';
+            document.getElementById('volumeFenobarbitalMMin').value = '';
+            document.getElementById('volumeFenobarbitalMMax').value = '';
             document.getElementById('mensagemAlerta').style.display = 'none';
         }
-
         function iniciarProtocolos() {
             document.getElementById('animal').value = 'selecione';
             document.getElementById('pesoAnimal').value = '';
-
-            document.getElementById('concentracaoDexmedetomidina').value = '0.5';
-            document.getElementById('concentracaoMetadona').value = '10';
-            document.getElementById('concentracaoCetamina').value = '100';
-            document.getElementById('concentracaoPropofol').value = '10';
-            document.getElementById('concentracaoLidocaina').value = '20';
-
-
-            
-
-            document.getElementById('volumeDexmedetomidinaMin').value = '';
-            document.getElementById('volumeDexmedetomidinaMax').value = '';
-            document.getElementById('volumeMetadonaMin').value = '';
-            document.getElementById('volumeMetadonaMax').value = '';
-            document.getElementById('volumeCetaminaMin').value = '';
-            document.getElementById('volumeCetaminaMax').value = '';
-            document.getElementById('volumePropofolMin').value = '';
-            document.getElementById('volumePropofolMax').value = '';
+            document.getElementById('concentracaoEscopolamina').value = '';
+            document.getElementById('concentracaoAtropina').value = '';
+            document.getElementById('concentracaoAdrenalina').value = '';
+            document.getElementById('concentracaoLidocaina').value = '';
+            document.getElementById('concentracaoNaloxona').value = '';
+            document.getElementById('concentracaoFlumazenil').value = '';
+            document.getElementById('concentracaoAtipamezole').value = '';
+            document.getElementById('concentracaoDoxapran').value = '';
+            document.getElementById('concentracaoDiazepam').value = '';
+            document.getElementById('concentracaoFenobarbital').value = '';
+            document.getElementById('concentracaoFenobarbitalM').value = '';
+            document.getElementById('volumeEscopolaminaMin').value = '';
+            document.getElementById('volumeEscopolaminaMax').value = '';
+            document.getElementById('volumeAtropinaMin').value = '';
+            document.getElementById('volumeAtropinaMax').value = '';
+            document.getElementById('volumeAdrenalinaMin').value = '';
+            document.getElementById('volumeAdrenalinaMax').value = '';
             document.getElementById('volumeLidocainaMin').value = '';
             document.getElementById('volumeLidocainaMax').value = '';
-
-           
-
-            document.getElementById('doseDexmedetomidinaMin').value = '';
-            document.getElementById('doseDexmedetomidinaMax').value = '';
-            document.getElementById('doseMetadonaMin').value = '';
-            document.getElementById('doseMetadonaMax').value = '';
-            document.getElementById('doseCetaminaMin').value = '';
-            document.getElementById('doseCetaminaMax').value = '';
-            document.getElementById('dosePropofolMin').value = '';
-            document.getElementById('dosePropofolMax').value = '';
+            document.getElementById('volumeNaloxonaMin').value = '';
+            document.getElementById('volumeNaloxonaMax').value = '';
+            document.getElementById('volumeFlumazenilMin').value = '';
+            document.getElementById('volumeFlumazenilMax').value = '';
+            document.getElementById('volumeAtipamezoleMin').value = '';
+            document.getElementById('volumeAtipamezoleMax').value = '';
+            document.getElementById('volumeDoxapranMin').value = '';
+            document.getElementById('volumeDoxapranMax').value = '';
+            document.getElementById('volumeDiazepamMin').value = '';
+            document.getElementById('volumeDiazepamMax').value = '';
+            document.getElementById('volumeFenobarbitalMin').value = '';
+            document.getElementById('volumeFenobarbitalMax').value = '';
+            document.getElementById('volumeFenobarbitalMMin').value = '';
+            document.getElementById('volumeFenobarbitalMMax').value = '';
+            document.getElementById('doseEscopolaminaMin').value = '';
+            document.getElementById('doseEscopolaminaMax').value = '';
+            document.getElementById('doseAtropinaMin').value = '';
+            document.getElementById('doseAtropinaMax').value = '';
+            document.getElementById('doseAdrenalinaMin').value = '';
+            document.getElementById('doseAdrenalinaMax').value = '';
             document.getElementById('doseLidocainaMin').value = '';
             document.getElementById('doseLidocainaMax').value = '';
-
-            
-
+            document.getElementById('doseNaloxonaMin').value = '';
+            document.getElementById('doseNaloxonaMax').value = '';
+            document.getElementById('doseFlumazenilMin').value = '';
+            document.getElementById('doseFlumazenilMax').value = '';
+            document.getElementById('doseAtipamezoleMin').value = '';
+            document.getElementById('doseAtipamezoleMax').value = '';
+            document.getElementById('doseDoxapranMin').value = '';
+            document.getElementById('doseDoxapranMax').value = '';
+            document.getElementById('doseDiazepamMin').value = '';
+            document.getElementById('doseDiazepamMax').value = '';
+            document.getElementById('doseFenobarbitalMin').value = '';
+            document.getElementById('doseFenobarbitalMax').value = '';
+            document.getElementById('doseFenobarbitalMMin').value = '';
+            document.getElementById('doseFenobarbitalMMax').value = '';
             document.getElementById('mensagemAlerta').style.display = 'none';
         }
-
         function voltar() {
             window.location.href = 'index.html';
         }
     </script>
+
 </body>
 
 </html>
