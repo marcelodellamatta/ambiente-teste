@@ -1003,6 +1003,7 @@
             document.getElementById('volumeFenobarbital').value = doseVolumeFenobarbitalText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
         }
         function limparResultadosAoTrocarAnimal() {
+            document.getElementById('pesoAnimal').value = '';
             document.getElementById('volumeEscopolamina').value = '';
             document.getElementById('volumeAtropina').value = '';
             document.getElementById('volumeAdrenalina').value = '';
@@ -1013,6 +1014,7 @@
             document.getElementById('volumeDoxapram').value = '';
             document.getElementById('volumeDiazepam').value = '';
             document.getElementById('volumeFenobarbital').value = '';
+            document.getElementById('mensagemAlerta').style.display = 'none';
         }
         function limparResultados() {
             document.getElementById('pesoAnimal').value = '';
