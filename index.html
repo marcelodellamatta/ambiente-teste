@@ -110,6 +110,7 @@
             font-size: 13px;
             margin-top: 20px;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .calculadora-container-legenda {
@@ -436,13 +437,7 @@
         <img class="carousel-image" src="./images/calculadorahome.jpg" alt="home" id="imagemRecarregar"
             style="cursor: pointer;">
         <h5>Fármacos de Emergência</h5>
-        <div class="calculadora-container-mensa">
-            <li>Protocolo elaborado pelo Médico Veterinário Marcelo Della Matta, CRMV-PR 00000.</li>
 
-            <li>Para melhor visualização,
-                recomendamos tela maior que 640px ou visualize horizontalmente no
-                smartphone.</li>
-        </div>
         <div class="seletor-animal">
             <label for="animal">Selecione o Animal:</label>
             <select id="animal" name="animal" onchange="limparResultadosAoTrocarAnimal();">
@@ -777,6 +772,9 @@
             <button onclick="calcularVolumes()">Calcular</button>
         </div>
         <div id="mensagemAlerta"></div>
+        <div class="calculadora-container-mensa">
+            Protocolo elaborado pelo Médico Veterinário Marcelo Della Matta, CRMV-PR 00000.
+        </div>
         <button class="botao-voltar" onclick="voltar()">◀︎ VOLTAR</button>
         <footer>
             © 2024 Marcelo Della Matta
