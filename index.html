@@ -494,6 +494,15 @@
                     <input type="text" class="valores-input resultado" id="volumeEscopolamina" name="volumeEscopolamina"
                         readonly />
                 </div>
+
+
+                <div class="calculadora-container-legenda">
+                  <li>Não recomendado para gatos</li>
+                </div>
+                
+
+
+
             </div>
         </div>
         <div id="bradicardiapersistente" style="display: none;">
@@ -584,6 +593,9 @@
                     <input type="text" class="valores-input resultado" id="volumeLidocaina" name="volumeLidocaina"
                         readonly />
                 </div>
+                <div class="calculadora-container-legenda">
+                    <li>Não usar em bradiarritmias</li>
+                  </div>
             </div>
         </div>
         <div id="reversoropioides" style="display: none;">
@@ -674,6 +686,10 @@
                     <input type="text" class="valores-input resultado" id="volumeAtipamezole" name="volumeAtipamezole"
                         readonly />
                 </div>
+                <div class="calculadora-container-legenda">
+                    <li>10x a dose de dexmedetomidina para cães e 5 x para gatos.</li>
+                    <li>Quando se usa dexdomitor e antisedan, o volume para cães é o mesmo e para gatos é a metade do volume.</li>
+                  </div>
             </div>
         </div>
         <div id="depressaorespiratoria" style="display: none;">
@@ -743,27 +759,41 @@
                     <h3>Fármaco</h3>
                     <input type="text" class="valores-input" id="nomeFenobarbital" name="nomeFenobarbital"
                         value="Fenobarbital" readonly />
+                        <input type="text" class="valores-input" id="nomeFenobarbitalMan" name="nomeFenobarbitalMan"
+                        value="* Fenobarbital" readonly />
                 </div>
                 <div class="dose-col">
                     <h3>Dose</h3>
                     <select id="doseFenobarbital" name="doseFenobarbital" class="valores-input">
+                    </select>
+                    <select id="doseFenobarbitalMan" name="doseFenobarbitalMan" class="valores-input">
                     </select>
                 </div>
                 <div class="concentracao-col">
                     <h3>Concentração</h3>
                     <select id="concentracaoFenobarbital" name="concentracaoFenobarbital" class="valores-input">
                     </select>
+                    <select id="concentracaoFenobarbitalMan" name="concentracaoFenobarbitalMan" class="valores-input">
+                    </select>
                 </div>
                 <div class="viaadmin-col">
                     <h3>Via de Admin</h3>
                     <input type="text" class="valores-input " id="viadeadminFenobarbital" name="viadeadminFenobarbital"
                         value="IV" readonly />
+                        <input type="text" class="valores-input " id="viadeadminFenobarbitalMan" name="viadeadminFenobarbitalMan"
+                        value="IV/IM" readonly />
                 </div>
                 <div class="volume-col">
                     <h3>Volume</h3>
                     <input type="text" class="valores-input resultado" id="volumeFenobarbital" name="volumeFenobarbital"
                         readonly />
+                        <input type="text" class="valores-input resultado" id="volumeFenobarbitalMan" name="volumeFenobarbitalMan"
+                        readonly />
                 </div>
+                <div class="calculadora-container-legenda">
+                    <li>* Dose de manutenção, podendo ser feito IM após o controle do quadro </li>
+                    
+                  </div>
             </div>
         </div>
         <div class="btn-container">
@@ -773,7 +803,7 @@
         </div>
         <div id="mensagemAlerta"></div>
         <div class="calculadora-container-mensa">
-            Protocolo elaborado pelo Médico Veterinário Marcelo Della Matta, CRMV-PR 00000.
+            Protocolos elaborado pelo Médico Veterinário Vinícius Gross Balestrin CRMV-PR 21774
         </div>
         <button class="botao-voltar" onclick="voltar()">◀︎ VOLTAR</button>
         <footer>
@@ -796,47 +826,68 @@
             var doseDoxapram = document.getElementById("doseDoxapram");
             var doseDiazepam = document.getElementById("doseDiazepam");
             var doseFenobarbital = document.getElementById("doseFenobarbital");
+            var doseFenobarbitalMan = document.getElementById("doseFenobarbitalMan");
             doseEscopolamina.innerHTML = '';
             doseAtropina.innerHTML = '';
+            doseAdrenalina.innerHTML = '';
+            doseLidocaina.innerHTML = '';
+            doseNaloxona.innerHTML = '';
+            doseFlumazenil.innerHTML = '';
+            doseAtipamezole.innerHTML = '';
+            doseDoxapram.innerHTML = '';
+            doseDiazepam.innerHTML = '';
+            doseFenobarbital.innerHTML = '';
+            doseFenobarbitalMan.innerHTML = '';
             if (animalSelecionado === "cao") {
-                adicionarOpcoesDose(0.3, 0.3, 0.1, "doseEscopolamina");
+                adicionarOpcoesDose(0.2, 0.3, 0.1, "doseEscopolamina");
                 adicionarOpcoesDose(0.02, 0.04, 0.01, "doseAtropina");
                 adicionarOpcoesDose(0.01, 0.01, 0.01, "doseAdrenalina");
                 adicionarOpcoesDose(2, 4, 1, "doseLidocaina");
                 adicionarOpcoesDose(0.01, 0.04, 0.01, "doseNaloxona");
-                adicionarOpcoesDose(0.2, 0.2, 0.1, "doseFlumazenil");
-                adicionarOpcoesDose(0, 0, 0.1, "doseAtipamezole");
+                adicionarOpcoesDose(0.01, 0.2, 0.01, "doseFlumazenil");
+                adicionarOpcoesDose(0.001, 0.003, 0.001, "doseAtipamezole");
                 adicionarOpcoesDose(5, 10, 1, "doseDoxapram");
                 adicionarOpcoesDose(0.5, 1, 0.1, "doseDiazepam");
                 adicionarOpcoesDose(10, 20, 1, "doseFenobarbital");
+                adicionarOpcoesDose(2, 4, 1, "doseFenobarbitalMan");
             } else if (animalSelecionado === "gato") {
                 adicionarOpcoesDose(0, 0, 0.1, "doseEscopolamina");
                 adicionarOpcoesDose(0.02, 0.04, 0.01, "doseAtropina");
                 adicionarOpcoesDose(0.01, 0.01, 0.01, "doseAdrenalina");
                 adicionarOpcoesDose(2, 4, 1, "doseLidocaina");
                 adicionarOpcoesDose(0.01, 0.04, 0.01, "doseNaloxona");
-                adicionarOpcoesDose(0.2, 0.2, 0.1, "doseFlumazenil");
-                adicionarOpcoesDose(0, 0, 0.1, "doseAtipamezole");
+                adicionarOpcoesDose(0.01, 0.2, 0.01, "doseFlumazenil");
+                adicionarOpcoesDose(0.02, 0.05, 0.01, "doseAtipamezole");
                 adicionarOpcoesDose(5, 10, 1, "doseDoxapram");
                 adicionarOpcoesDose(0.5, 1, 0.1, "doseDiazepam");
                 adicionarOpcoesDose(10, 20, 1, "doseFenobarbital");
+                adicionarOpcoesDose(2, 4, 1, "doseFenobarbitalMan");
             }
         });
         function adicionarOpcoesDose(min, max, step, selectId) {
-            var select = document.getElementById(selectId);
-            for (var i = min; i <= max; i += step) {
-                var option = document.createElement("option");
-                var formattedValue;
-                if (i % 1 === 0) {
-                    formattedValue = i.toFixed(0);
-                } else {
-                    formattedValue = i.toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 2 });
-                }
-                option.text = formattedValue + " mg/kg";
-                option.value = formattedValue;
-                select.add(option);
-            }
+    var select = document.getElementById(selectId);
+    var decimalPlaces = step.toString().split('.')[1]?.length || 0;
+    
+    for (var i = min; i <= max; ) {
+        var option = document.createElement("option");
+        var formattedValue;
+        
+        if (decimalPlaces === 0) {
+            formattedValue = i.toFixed(0);
+        } else {
+            formattedValue = i.toLocaleString('pt-BR', { minimumFractionDigits: decimalPlaces, maximumFractionDigits: decimalPlaces });
         }
+        
+        option.text = formattedValue + " mg/kg";
+        option.value = formattedValue;
+        select.add(option);
+        
+        i = parseFloat((i + step).toFixed(decimalPlaces));
+    }
+}
+
+
+
         function adicionarOpcoesConcentracao() {
             var selectConcentracaoEscopolamina = document.getElementById("concentracaoEscopolamina");
             var selectConcentracaoAtropina = document.getElementById("concentracaoAtropina");
@@ -848,6 +899,7 @@
             var selectConcentracaoDoxapram = document.getElementById("concentracaoDoxapram");
             var selectConcentracaoDiazepam = document.getElementById("concentracaoDiazepam");
             var selectConcentracaoFenobarbital = document.getElementById("concentracaoFenobarbital");
+            var selectConcentracaoFenobarbitalMan = document.getElementById("concentracaoFenobarbitalMan");
             selectConcentracaoEscopolamina.innerHTML = '';
             selectConcentracaoAtropina.innerHTML = '';
             var concentracaoEscopolaminaopcao1 = document.createElement("option");
@@ -898,6 +950,8 @@
             concentracaoDiazepamOpcao1.text = "5 mg/mL";
             concentracaoDiazepamOpcao1.value = "5";
             selectConcentracaoDiazepam.add(concentracaoDiazepamOpcao1);
+
+
             var concentracaoFenobarbitalOpcao1 = document.createElement("option");
             concentracaoFenobarbitalOpcao1.text = "200 mg/mL";
             concentracaoFenobarbitalOpcao1.value = "200";
@@ -906,6 +960,14 @@
             concentracaoFenobarbitalOpcao2.text = "100 mg/mL";
             concentracaoFenobarbitalOpcao2.value = "100";
             selectConcentracaoFenobarbital.add(concentracaoFenobarbitalOpcao2);
+            var concentracaoFenobarbitalManOpcao1 = document.createElement("option");
+            concentracaoFenobarbitalManOpcao1.text = "200 mg/mL";
+            concentracaoFenobarbitalManOpcao1.value = "200";
+            selectConcentracaoFenobarbitalMan.add(concentracaoFenobarbitalManOpcao1);
+            var concentracaoFenobarbitalManOpcao2 = document.createElement("option");
+            concentracaoFenobarbitalManOpcao2.text = "100 mg/mL";
+            concentracaoFenobarbitalManOpcao2.value = "100";
+            selectConcentracaoFenobarbitalMan.add(concentracaoFenobarbitalManOpcao2);
         }
         document.getElementById("doseEscopolamina").addEventListener("change", function () {
             var selectedValue = this.value;
@@ -947,6 +1009,10 @@
             var selectedValue = this.value;
             console.log("Dose de Fenobarbital selecionada: " + selectedValue + " mg/kg");
         });
+        document.getElementById("doseFenobarbitalMan").addEventListener("change", function () {
+            var selectedValue = this.value;
+            console.log("Dose de FenobarbitalMan selecionada: " + selectedValue + " mg/kg");
+        });
         function calcularVolumes() {
             var pesoAnimal = parseFloat(document.getElementById("pesoAnimal").value);
             var doseSelecionadaEscopolamina = parseFloat(document.getElementById("doseEscopolamina").value.replace(',', '.'));
@@ -959,6 +1025,7 @@
             var doseSelecionadaDoxapram = parseFloat(document.getElementById("doseDoxapram").value.replace(',', '.'));
             var doseSelecionadaDiazepam = parseFloat(document.getElementById("doseDiazepam").value.replace(',', '.'));
             var doseSelecionadaFenobarbital = parseFloat(document.getElementById("doseFenobarbital").value.replace(',', '.'));
+            var doseSelecionadaFenobarbitalMan = parseFloat(document.getElementById("doseFenobarbitalMan").value.replace(',', '.'));
             var concentracaoSelecionadaEscopolamina = parseFloat(document.getElementById("concentracaoEscopolamina").value.replace(',', '.'));
             var concentracaoSelecionadaAtropina = parseFloat(document.getElementById("concentracaoAtropina").value.replace(',', '.'));
             var concentracaoSelecionadaAdrenalina = parseFloat(document.getElementById("concentracaoAdrenalina").value.replace(',', '.'));
@@ -969,6 +1036,7 @@
             var concentracaoSelecionadaDoxapram = parseFloat(document.getElementById("concentracaoDoxapram").value.replace(',', '.'));
             var concentracaoSelecionadaDiazepam = parseFloat(document.getElementById("concentracaoDiazepam").value.replace(',', '.'));
             var concentracaoSelecionadaFenobarbital = parseFloat(document.getElementById("concentracaoFenobarbital").value.replace(',', '.'));
+            var concentracaoSelecionadaFenobarbitalMan = parseFloat(document.getElementById("concentracaoFenobarbitalMan").value.replace(',', '.'));
             var volumeEscopolamina = (pesoAnimal * doseSelecionadaEscopolamina) / concentracaoSelecionadaEscopolamina;
             var volumeAtropina = (pesoAnimal * doseSelecionadaAtropina) / concentracaoSelecionadaAtropina;
             var volumeAdrenalina = (pesoAnimal * doseSelecionadaAdrenalina) / concentracaoSelecionadaAdrenalina;
@@ -979,6 +1047,7 @@
             var volumeDoxapram = (pesoAnimal * doseSelecionadaDoxapram) / concentracaoSelecionadaDoxapram;
             var volumeDiazepam = (pesoAnimal * doseSelecionadaDiazepam) / concentracaoSelecionadaDiazepam;
             var volumeFenobarbital = (pesoAnimal * doseSelecionadaFenobarbital) / concentracaoSelecionadaFenobarbital;
+            var volumeFenobarbitalMan = (pesoAnimal * doseSelecionadaFenobarbitalMan) / concentracaoSelecionadaFenobarbitalMan;
             var doseVolumeEscopolaminaText = (Math.floor(volumeEscopolamina * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             var doseVolumeAtropinaText = (Math.floor(volumeAtropina * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             var doseVolumeAdrenalinaText = (Math.floor(volumeAdrenalina * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
@@ -989,6 +1058,7 @@
             var doseVolumeDoxapramText = (Math.floor(volumeDoxapram * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             var doseVolumeDiazepamText = (Math.floor(volumeDiazepam * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             var doseVolumeFenobarbitalText = (Math.floor(volumeFenobarbital * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+            var doseVolumeFenobarbitalManText = (Math.floor(volumeFenobarbitalMan * 100) / 100).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
             document.getElementById('volumeEscopolamina').value = doseVolumeEscopolaminaText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
             document.getElementById('volumeAtropina').value = doseVolumeAtropinaText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
             document.getElementById('volumeAdrenalina').value = doseVolumeAdrenalinaText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
@@ -999,6 +1069,7 @@
             document.getElementById('volumeDoxapram').value = doseVolumeDoxapramText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
             document.getElementById('volumeDiazepam').value = doseVolumeDiazepamText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
             document.getElementById('volumeFenobarbital').value = doseVolumeFenobarbitalText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
+            document.getElementById('volumeFenobarbitalMan').value = doseVolumeFenobarbitalManText.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " mL";
         }
         function limparResultadosAoTrocarAnimal() {
             document.getElementById('pesoAnimal').value = '';
@@ -1012,6 +1083,7 @@
             document.getElementById('volumeDoxapram').value = '';
             document.getElementById('volumeDiazepam').value = '';
             document.getElementById('volumeFenobarbital').value = '';
+            document.getElementById('volumeFenobarbitalMan').value = '';
             document.getElementById('mensagemAlerta').style.display = 'none';
         }
         function limparResultados() {
@@ -1026,6 +1098,7 @@
             document.getElementById('volumeDoxapram').value = '';
             document.getElementById('volumeDiazepam').value = '';
             document.getElementById('volumeFenobarbital').value = '';
+            document.getElementById('volumeFenobarbitalMan').value = '';
             document.getElementById('mensagemAlerta').style.display = 'none';
         }
         function iniciarProtocolos() {
